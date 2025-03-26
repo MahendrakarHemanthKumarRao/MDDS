@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Food Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #34a853;
+            --secondary-color: #34a853;
+            --header-footer-color: #34a853;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #34a853;
+            border: 1px solid #34a853;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #34a853;
+            color: white;
+        }
+
+
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Brain Tumor Food Recommendation</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('btbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+<div class="container">
+    <div class="section">
+        <h2>Fruits and Vegetables</h2>
+        <ul>
+            <li>Brightly colored fruits and vegetables (carrots, tomatoes, peppers): Packed with antioxidants.</li>
+            <li>Bananas and apples for a quick energy boost.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Whole Grains</h2>
+        <ul>
+            <li>Whole-wheat bread, pasta, and cereals for long-lasting energy.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Proteins</h2>
+        <ul>
+            <li>Eggs: Contain choline, which supports brain function.</li>
+            <li>Lean meats and legumes.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Dairy</h2>
+        <ul>
+            <li>Low-fat milk, yogurt, and cheese for calcium and probiotics.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Snacks</h2>
+        <ul>
+            <li>Dark chocolate (in moderation): Contains flavonoids for brain health.</li>
+            <li>Trail mix with dried fruits and nuts.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Drinks</h2>
+        <ul>
+            <li>Herbal teas and fresh fruit juices without added sugar.</li>
+            <li>Coconut water for natural electrolytes.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Foods to Avoid</h2>
+        <ul>
+            <li>Deep-fried and junk food.</li>
+            <li>Excessive caffeine or energy drinks.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>General Tips for Both Scenarios</h2>
+        <ul>
+            <li>Portion Control: Avoid overeating to maintain a healthy weight.</li>
+            <li>Meal Timing: Eat small, frequent meals to stabilize energy levels.</li>
+            <li>Personalization: Consult with a nutritionist to tailor dietary needs based on the individual’s health and preferences.</li>
+        </ul>
+    </div>
+
+
+        <!-- Additional Tips Section -->
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Small, Frequent Meals: Eating smaller portions more frequently can help manage nausea and energy levels.</li>
+                <li>Fresh, Organic Produce: Prefer organic produce when possible to reduce exposure to pesticides.</li>
+                <li>Consult a Nutritionist/Dietitian: Personalized nutrition advice can help cater to individual health needs and treatment plans.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Brain Tumor Food Recommendation</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

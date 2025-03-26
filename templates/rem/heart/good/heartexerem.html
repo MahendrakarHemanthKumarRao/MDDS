@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart-Healthy Exercise Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #ffffff;
+            --background-light: #f4f6f7;
+            --text-color: #00796b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+.btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #004d40;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #00332e;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            background-color: #00221a;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .exercise-item img {
+            width: 350px;
+            height: 200px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .exercise-item p {
+            margin: 0;
+            color: var(--text-color);
+        }
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Heart-Healthy Exercise Recommendations</h1>
+ <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('heartbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Recommended Exercises</h2>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/tadasana.jpg') }}" alt="Tadasana">
+                <p><strong>Tadasana (Mountain Pose):</strong> Improves posture and promotes blood circulation.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/vrikshasana.jpg') }}" alt="Vrikshasana">
+                <p><strong>Vrikshasana (Tree Pose):</strong> Enhances balance and strengthens the heart.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/adho mukha svanasana.jpg') }}" alt="Downward Dog Pose">
+                <p><strong>Adho Mukha Svanasana (Downward Dog Pose):</strong> Boosts circulation and relaxes the heart muscles.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/Bhujangasana.jpg') }}" alt="Cobra Pose">
+                <p><strong>Bhujangasana (Cobra Pose):</strong> Opens the chest, improving lung and heart function.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/setu bandhasana.jpg')}}" alt="Bridge Pose">
+                <p><strong>Setu Bandhasana (Bridge Pose):</strong> Strengthens the heart by increasing blood flow.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/Uttanasana.jpg') }}" alt="Standing Forward Bend">
+                <p><strong>Uttanasana (Standing Forward Bend):</strong> Relieves stress and improves heart rate.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/anulom vilom.jpg') }}" alt="Anulom Vilom">
+                <p><strong>Anulom Vilom (Alternate Nostril Breathing):</strong> Balances blood pressure and calms the mind.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/shavasana.jpg') }}" alt="Shavasana">
+                <p><strong>Shavasana (Corpse Pose):</strong> Reduces stress and promotes overall heart relaxation.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/walking.jpg') }}" alt="Walking">
+                <p><strong>Walking (Brisk or Casual):</strong> Enhances cardiovascular endurance and lowers blood pressure.</p>
+            </div>
+
+            <div class="exercise-item">
+                <img src="{{ url_for('static', filename='heart/pranayama.png') }}" alt="Pranayama">
+                <p><strong>Pranayama (Deep Breathing Exercises):</strong> Increases oxygen supply and strengthens the respiratory system.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved.Heart-Healthy Exercise Recommendations.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

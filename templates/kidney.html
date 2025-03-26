@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kidney Disease Prediction</title>
+  <style>
+    body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    padding: 20px 0;
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.container1, .container {
+    width: 85%;
+    max-width: 650px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.container:hover, .container1:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+label {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
+    background-color: #fff;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #004c99;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #d9534f;
+    font-weight: 500;
+}
+
+/* Popup and overlay styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 999;
+    backdrop-filter: blur(3px);
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+    min-width: 300px;
+    max-width: 450px;
+    text-align: center;
+}
+
+#popup h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+#popup p {
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#popup button {
+    padding: 10px 20px;
+    margin: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#popup button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+#popup button:first-of-type:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#popup button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+#popup button:last-of-type:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container1, .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input[type="number"], input[type="text"] {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+    }
+}
+
+/* Style for the fetch data button */
+#patientForm button {
+    padding: 12px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: 600;
+}
+
+#patientForm button:hover {
+    background-color: #004c99;
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  </style>
+</head>
+<body>
+  <!-- Background Video -->
+  <video autoplay muted loop id="background-video">
+    <!-- Update the src path as needed -->
+    <source src="{{ url_for('static', filename='video/kidney.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+    <!-- Right: Kidney Disease Prediction Form -->
+    <div class="container">
+      <h1>Kidney Disease Prediction</h1>
+      <div class="scroll-container">
+        <form id="predictionForm">
+          <!-- Each form-group below contains a label with an optional helper text (input-info) and an input element. -->
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+
+          <div class="form-group">
+            <label for="blood_pressure">Blood Pressure (mm Hg):</label>
+            <input type="number" id="blood_pressure" name="blood_pressure" required>
+          </div>
+
+          <div class="form-group">
+            <label for="specific_gravity">Specific Gravity:</label>
+            <div class="input-info">Normal range: 1.005-1.025</div>
+            <input type="number" id="specific_gravity" name="specific_gravity" required step="0.001">
+          </div>
+
+          <div class="form-group">
+            <label for="albumin">Albumin:</label>
+            <div class="input-info">Scale: 0-5</div>
+            <input type="number" id="albumin" name="albumin" required min="0" max="5">
+          </div>
+
+          <div class="form-group">
+            <label for="sugar">Sugar:</label>
+            <div class="input-info">Scale: 0-5</div>
+            <input type="number" id="sugar" name="sugar" required min="0" max="5">
+          </div>
+
+          <div class="form-group">
+            <label for="red_blood_cells">Red Blood Cells:</label>
+            <div class="input-info">0 for normal, 1 for abnormal</div>
+            <input type="number" id="red_blood_cells" name="red_blood_cells" required min="0" max="1">
+          </div>
+
+          <div class="form-group">
+            <label for="pus_cell">Pus Cell:</label>
+            <div class="input-info">0 for normal, 1 for abnormal</div>
+            <input type="number" id="pus_cell" name="pus_cell" required min="0" max="1">
+          </div>
+
+          <div class="form-group">
+            <label for="blood_glucose_random">Blood Glucose Random (mg/dL):</label>
+            <input type="number" id="blood_glucose_random" name="blood_glucose_random" required>
+          </div>
+
+          <div class="form-group">
+            <label for="blood_urea">Blood Urea (mg/dL):</label>
+            <input type="number" id="blood_urea" name="blood_urea" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="serum_creatinine">Serum Creatinine (mg/dL):</label>
+            <input type="number" id="serum_creatinine" name="serum_creatinine" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="sodium">Sodium (mEq/L):</label>
+            <input type="number" id="sodium" name="sodium" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="potassium">Potassium (mEq/L):</label>
+            <input type="number" id="potassium" name="potassium" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="hemoglobin">Hemoglobin (g/dL):</label>
+            <input type="number" id="hemoglobin" name="hemoglobin" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="packed_cell_volume">Packed Cell Volume (%):</label>
+            <input type="number" id="packed_cell_volume" name="packed_cell_volume" required>
+          </div>
+
+          <div class="form-group">
+            <label for="white_blood_cell_count">White Blood Cell Count (cells/cumm):</label>
+            <input type="number" id="white_blood_cell_count" name="white_blood_cell_count" required>
+          </div>
+
+          <div class="form-group">
+            <label for="red_blood_cell_count">Red Blood Cell Count (millions/cmm):</label>
+            <input type="number" id="red_blood_cell_count" name="red_blood_cell_count" required step="0.1">
+          </div>
+
+          <div class="form-group">
+            <label for="appetite">Appetite:</label>
+            <div class="input-info">0 for poor, 1 for good</div>
+            <input type="number" id="appetite" name="appetite" required min="0" max="1">
+          </div>
+
+          <div class="form-group">
+            <label for="anemia">Anemia:</label>
+            <div class="input-info">0 for no, 1 for yes</div>
+            <input type="number" id="anemia" name="anemia" required min="0" max="1">
+          </div>
+
+          <button type="submit" class="btn">Generate and Download Report</button>
+        </form>
+      </div>
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+  <!-- Overlay and Popup for Report Confirmation -->
+  <div id="overlay"></div>
+  <div id="popup">
+    <h2>Report Generated</h2>
+    <p>Your report has been successfully generated.</p>
+    <b>
+      <p>Doctor Recommendation: You should consult a doctor for further analysis.</p>
+    </b>
+    <button class="primary" onclick="redirectToNextPage()">View Recommendations</button>
+    <button class="secondary" onclick="closePopup()">Close</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    &copy; 2024 Kidney Disease Prediction System
+  </div>
+
+  <!-- JavaScript for Form Handling and Popup Functionality -->
+  <script>
+    // Handle the Kidney Disease Prediction Form submission.
+    document.getElementById('predictionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+
+      // Send the form data to the back-end endpoint.
+      fetch('/predict/kidney', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => { throw new Error(err.error); });
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        // Create a URL for the blob and initiate download.
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'kidney_disease_report.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        document.getElementById('result').textContent = 'Report generated and downloaded successfully!';
+        document.getElementById('result').className = 'result success';
+        showPopup();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('result').textContent = 'Error: ' + error.message;
+        document.getElementById('result').className = 'result error';
+      });
+    });
+
+    // Show the popup after a successful report generation.
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    // Redirect the user to the recommendations page.
+    function redirectToNextPage(isDiseasePredicted) {
+      // Update the URL as needed (if using Flask, consider url_for)
+      if (isDiseasePredicted) {
+        // Redirect to a page with recommendations for heart disease
+        window.location.href = "{{ url_for('kidneyremb') }}"; // Replace with your actual route
+    } else {
+        // Redirect to a page with general health tips or no disease recommendations
+        window.location.href = "{{ url_for('kidneyremg') }}"; // Replace with your actual route
+    }
+    }
+
+    // Close the popup and reload the page.
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+      location.reload();
+    }
+
+    // Function to fetch patient data for the Heart Disease form.
+    function fetchPatientData() {
+      var patientId = document.getElementById('patient_id').value;
+      if (!patientId) {
+        alert('Please enter a Patient ID');
+        return;
+      }
+      // Example: Fetch data from a backend endpoint (adjust URL as needed)
+      fetch('/getPatientData?patientId=' + patientId)
+        .then(response => response.json())
+        .then(data => {
+          // Populate the patient details
+          document.getElementById('name').value = data.name || 'Not found';
+        })
+        .catch(error => {
+          console.error('Error fetching patient data:', error);
+          alert('Error fetching patient data');
+        });
+    }
+
+    /*
+    Additional block of code (seemingly for fetching more detailed patient data) –
+    ensure that the corresponding elements exist in the HTML if you plan to use these fields.
+    */
+    fetch('/get_patient_data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ patient_id: patientId }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => {
+            throw new Error(data.error || "Failed to fetch patient data");
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById('name').value = data.name || '';
+        // If these kidney-related field elements exist in your Heart Disease form,
+        // they can be populated with the fetched data.
+        document.getElementById('bp').value = data.bp || '';
+        document.getElementById('sg').value = data.sg || '';
+        document.getElementById('al').value = data.al || '';
+        document.getElementById('bgr').value = data.bgr || '';
+        document.getElementById('rbc').value = data.rbc || '';
+        document.getElementById('rbc_count').value = data.rbc_count || '';
+        document.getElementById('pc').value = data.pc || '';
+        document.getElementById('pcc').value = data.pcc || '';
+        document.getElementById('ba').value = data.ba || '';
+        document.getElementById('bu').value = data.bu || '';
+        document.getElementById('sc').value = data.sc || '';
+        document.getElementById('sod').value = data.sod || '';
+        document.getElementById('pot').value = data.pot || '';
+        document.getElementById('hemo').value = data.hemo || '';
+        document.getElementById('pcv').value = data.pcv || '';
+        document.getElementById('wc').value = data.wc || '';
+        document.getElementById('rc').value = data.rc || '';
+      })
+      .catch(error => {
+        document.getElementById('result').textContent = error.message;
+        document.getElementById('result').className = 'result error';
+      });
+  </script>
+</body>
+</html>

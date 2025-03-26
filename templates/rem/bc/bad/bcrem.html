@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Recommendations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-color: #990066; /* Pink */
+            --secondary-color: #6c5ce7; /* Purple */
+            --background-light: #f8f0f8;
+            --text-color: #2d3436;
+        }
+
+        body {
+            background-color: var(--background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .container {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .title {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            margin: 0 auto 10px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fde2e2;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Breast Cancer Recommendations</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="title">Breast Cancer Recommendations</h1>
+        <div class="card-container">
+            <div class="card" data-url="{{ url_for('bcfoodremb') }}">
+                <div class="card-icon">🥗</div>
+                <h2>Diet & Nutrition</h2>
+                <p>Learn about a diet plan for breast cancer prevention and care.</p>
+            </div>
+            <div class="card" data-url="{{ url_for('bcexeremb') }}">
+                <div class="card-icon">🏋️</div>
+                <h2>Exercise</h2>
+                <p>Find out about exercises that aid in recovery and prevention.</p>
+            </div>
+            <div class="card" data-url="{{ url_for('bcremddocb') }}">
+                <div class="card-icon">👨‍⚕️</div>
+                <h2>Support Groups</h2>
+                <p>Connect with communities and support networks for better care.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Breast Cancer Recommendation.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                card.addEventListener("click", () => {
+                    window.location.href = card.dataset.url;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

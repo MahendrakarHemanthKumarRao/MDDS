@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Nutrition Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --header-footer-color: #4169e1;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #4169e1;
+            border: 1px solid #4169e1;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0 5px; /* Space between buttons */
+        }
+        .btn:hover {
+            background-color: #4169e1;
+            color: white;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pneumonia Nutrition Guide</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('pnback') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Pneumonia Nutrition Section -->
+        <div class="section">
+            <h2>Nutritional Recommendations</h2>
+            <p>For individuals with pneumonia, proper nutrition can help support the immune system and aid in recovery. Here are some general food recommendations that may be beneficial:</p>
+            <ul>
+                <li><strong>Nutrient-Dense Foods:</strong></li>
+                <li>Fruits & Vegetables: Rich in vitamins, especially Vitamin C, which helps boost the immune system.</li>
+                <ul>
+                    <li>Examples: Oranges, kiwi, bell peppers, spinach, broccoli.</li>
+                </ul>
+                <li>Lean Proteins: Support immune function and tissue repair.</li>
+                <ul>
+                    <li>Examples: Chicken, turkey, fish, tofu, legumes.</li>
+                </ul>
+                <li>Whole Grains: Provide energy and essential nutrients.</li>
+                <ul>
+                    <li>Examples: Brown rice, oatmeal, quinoa.</li>
+                </ul>
+                <li>Healthy Fats: Promote anti-inflammatory effects.</li>
+                <ul>
+                    <li>Examples: Avocado, nuts, seeds, olive oil.</li>
+                </ul>
+            </ul>
+        </div>
+
+        <!-- Hydration Section -->
+        <div class="section">
+            <h2>Hydration</h2>
+            <p>Staying hydrated is essential to aid in pneumonia recovery. Here’s why:</p>
+            <ul>
+                <li>Drink plenty of fluids like water, herbal teas, and broths to help loosen mucus and stay hydrated.</li>
+            </ul>
+        </div>
+
+        <!-- Immune-Boosting Foods Section -->
+        <div class="section">
+            <h2>Immune-Boosting Foods</h2>
+            <ul>
+                <li>Garlic: Contains compounds that have antimicrobial properties.</li>
+                <li>Ginger: Helps reduce inflammation and ease respiratory symptoms.</li>
+                <li>Yogurt: Provides probiotics to support gut health, which is connected to immune function.</li>
+            </ul>
+        </div>
+
+        <!-- Avoid Irritants Section -->
+        <div class="section">
+            <h2>Avoid Irritants</h2>
+            <ul>
+                <li>Stay away from processed, sugary, and greasy foods, as they can weaken the immune response and irritate the respiratory system.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Tips Section -->
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized nutrition advice.</li>
+                <li>Limit alcohol consumption to protect liver function.</li>
+                <li>Stay active with regular exercise.</li>
+                <li>Manage stress through relaxation techniques.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Nutritionists Worldwide.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

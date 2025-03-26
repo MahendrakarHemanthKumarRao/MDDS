@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liver Disease Prediction</title>
+  <style>
+    body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    padding: 20px 0;
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.container1, .container {
+    width: 85%;
+    max-width: 650px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.container:hover, .container1:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+label {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
+    background-color: #fff;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #004c99;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #d9534f;
+    font-weight: 500;
+}
+
+/* Popup and overlay styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 999;
+    backdrop-filter: blur(3px);
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+    min-width: 300px;
+    max-width: 450px;
+    text-align: center;
+}
+
+#popup h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+#popup p {
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#popup button {
+    padding: 10px 20px;
+    margin: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#popup button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+#popup button:first-of-type:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#popup button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+#popup button:last-of-type:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container1, .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input[type="number"], input[type="text"] {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+    }
+}
+
+/* Style for the fetch data button */
+#patientForm button {
+    padding: 12px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: 600;
+}
+
+#patientForm button:hover {
+    background-color: #004c99;
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  </style>
+</head>
+<body>
+  <!-- Background Video -->
+  <video autoplay muted loop id="background-video">
+    <source src="{{ url_for('static', filename='video/liver.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Flex Container Wrapping Both Forms -->
+  <div class="forms-wrapper">
+    <!-- Left: Heart Disease Prediction Form -->
+    <div class="container1">
+      <h1>Heart Disease Prediction</h1>
+      <form id="patientForm" class="form">
+        <div class="form-group">
+          <label for="patient_id">Patient ID:</label>
+          <input type="text" id="patient_id" name="patient_id" placeholder="Enter Patient ID">
+          <button type="button" onclick="fetchPatientData()">Fetch Data</button>
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" readonly>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right: Liver Disease Prediction Form -->
+    <div class="container">
+      <h1>Liver Disease Prediction</h1>
+      <form id="predictionForm">
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required>
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender (0 for female, 1 for male):</label>
+          <input type="number" id="gender" name="gender" required min="0" max="1">
+        </div>
+
+        <div class="form-group">
+          <label for="total_bilirubin">Total Bilirubin:</label>
+          <input type="number" id="total_bilirubin" name="total_bilirubin" required step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="direct_bilirubin">Direct Bilirubin:</label>
+          <input type="number" id="direct_bilirubin" name="direct_bilirubin" required step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="alkaline_phosphotase">Alkaline Phosphotase:</label>
+          <input type="number" id="alkaline_phosphotase" name="alkaline_phosphotase" required>
+        </div>
+
+        <div class="form-group">
+          <label for="alamine_aminotransferase">Alamine Aminotransferase:</label>
+          <input type="number" id="alamine_aminotransferase" name="alamine_aminotransferase" required>
+        </div>
+
+        <div class="form-group">
+          <label for="aspartate_aminotransferase">Aspartate Aminotransferase:</label>
+          <input type="number" id="aspartate_aminotransferase" name="aspartate_aminotransferase" required>
+        </div>
+
+        <div class="form-group">
+          <label for="total_proteins">Total Proteins:</label>
+          <input type="number" id="total_proteins" name="total_proteins" required step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="albumin">Albumin:</label>
+          <input type="number" id="albumin" name="albumin" required step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="albumin_globulin_ratio">Albumin and Globulin Ratio:</label>
+          <input type="number" id="albumin_globulin_ratio" name="albumin_globulin_ratio" required step="0.01">
+        </div>
+
+        <input type="hidden" name="disease" value="liver">
+        <button type="submit" class="btn">Generate and Download Report</button>
+      </form>
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+  <!-- Popup for Report Download -->
+  <div id="overlay"></div>
+  <div id="popup">
+    <h2>Report Generated</h2>
+    <p>Your report has been successfully generated.</p>
+    <p><strong>Doctor Recommendation:</strong> You should consult a doctor for further analysis.</p>
+    <button class="primary" onclick="redirectToNextPage()">View Recommendations</button>
+    <button class="secondary" onclick="closePopup()">Close</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer" style="text-align: center; margin-top: 20px; font-size: 14px; color: #777;">
+    &copy; 2024 Liver Disease Prediction System
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Handle Liver Disease Prediction Form Submission
+    document.getElementById('predictionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+
+      fetch('/predict/liver', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => {
+          if (response.ok) {
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/pdf')) {
+              return response.blob();
+            } else if (contentType && contentType.includes('application/json')) {
+              return response.json();
+            } else {
+              throw new Error('Unexpected content type: ' + contentType);
+            }
+          } else {
+            return response.text().then(text => { throw new Error(text) });
+          }
+        })
+        .then(data => {
+          if (data instanceof Blob) {
+            // Download the PDF Report
+            var url = window.URL.createObjectURL(data);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'liver_disease_report.pdf';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+
+            document.getElementById('result').textContent = 'Report downloaded successfully!';
+            document.getElementById('result').className = 'result success';
+            showPopup();
+          } else {
+            document.getElementById('result').textContent = 'Report data: ' + JSON.stringify(data);
+            document.getElementById('result').className = 'result success';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.getElementById('result').textContent = 'Error: ' + error.message;
+          document.getElementById('result').className = 'result error';
+        });
+    });
+
+    // Display the popup
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+ // Redirect to recommendations page
+function redirectToNextPage(isDiseasePredicted) {
+  if (isDiseasePredicted) {
+    // Redirect to disease-specific recommendations
+    window.location.href = "{{ url_for('liverremg') }}"; // Change this to your actual route for liver disease recommendations
+  } else {
+    // Redirect to general health tips page
+    window.location.href = "{{ url_for('liverremb') }}"; // Change this to your route for general health tips
+  }
+}
+
+    // Close the popup
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+      location.reload();
+    }
+
+    // Fetch patient data based on Patient ID
+    function fetchPatientData() {
+      const patientId = document.getElementById('patient_id').value;
+
+      if (!patientId) {
+        alert("Please enter a Patient ID");
+        return;
+      }
+
+      fetch('/get_patient_data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ patient_id: patientId }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(data => {
+              throw new Error(data.error || "Failed to fetch patient data");
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Populate fields with fetched data
+          document.getElementById('name').value = data.name || '';
+          document.getElementById('age').value = Math.round(data.age) || '';
+          document.getElementById('total_bilirubin').value = data.total_bilirubin || '';
+          document.getElementById('direct_bilirubin').value = data.direct_bilirubin || '';
+          document.getElementById('alkaline_phosphotase').value = data.alkaline_phosphotase || '';
+          document.getElementById('alamine_aminotransferase').value = data.alamine_aminotransferase || '';
+          document.getElementById('aspartate_aminotransferase').value = data.aspartate_aminotransferase || '';
+          document.getElementById('albumin').value = data.albumin || '';
+          document.getElementById('total_proteins').value = data.total_proteins || '';
+          document.getElementById('albumin_globulin_ratio').value = data.albumin_globulin_ratio || '';
+        })
+        .catch(error => {
+          document.getElementById('result').textContent = error.message;
+          document.getElementById('result').className = 'result error';
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDDS</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <!-- Lottie player for animations -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Opening Animation */
+        #opening-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        #opening-animation video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        body.loaded #opening-animation {
+            display: none;
+        }
+
+        /* Header Styles */
+        #header {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            color: #e0e0e0;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 3px solid #3B7CBB;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #header .nav_links a {
+            color: #90CAF9;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        #header .nav_links a:hover,
+        #header .nav_links a.active {
+            color: #FFCA28;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: #1a1a1a;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image lottie-player {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 50px 0;
+            text-align: center;
+            background: #121212;
+        }
+
+        .services h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .services p {
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .service {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+            max-width: 300px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .service img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: #c6d1e0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-image lottie-player {
+                max-width: 300px;
+            }
+
+            .services-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Opening Animation -->
+    <div id="opening-animation">
+        <video autoplay loop muted playsinline>
+            <source src="{{ url_for('static', filename='starting video.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <h1>MDDS</h1>
+        <nav class="nav_links">
+            <a href="{{ url_for('home') }}" class="active">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('loginhome') }}">Login</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to MDDS</h2>
+            <p>Comprehensive health analysis and disease prediction platform.</p>
+        </div>
+        <div class="hero-image">
+            <lottie-player src="https://lottie.host/e46f4dad-1566-4534-ab30-36c75ce24301/6DOSnd6wbl.json" background="transparent" speed="1" loop autoplay></lottie-player>
+        </div>
+    </section>
+
+     <section class="services">
+        <h2>Our Services</h2>
+        <p>We provide a range of services to meet your healthcare needs.</p>
+        <div class="services-grid">
+            <div class="service">
+                <img src="{{ url_for('static', filename='heart.jpg') }}" alt="Heart Disease Prediction Illustration">
+                <h3>Heart Disease </h3>
+                <p>Heart disease is caused by factors like high blood pressure, cholesterol, smoking, poor diet, lack of exercise, and genetics. It accounts for 32% of global deaths, with higher rates in low- and middle-income countries.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='liver.jpg') }}" alt="Liver Disease Detection Illustration">
+                <h3>Liver Disease </h3>
+                <p>Liver disease is caused by factors like viral infections, excessive alcohol consumption, obesity, and genetic disorders. It affects approximately 1 in 10 people globally, accounting for about 2% of all deaths, with rising prevalence in low-income regions.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='kidney.jpg') }}" alt="Kidney Health Analysis Illustration">
+                <h3>Kidney Disease</h3>
+                <p>Kidney disease is caused by diabetes, high blood pressure, glomerulonephritis, and urinary tract issues. It affects about 850 million people globally, accounting for roughly 1.5 million deaths annually, with increasing prevalence in low- and middle-income countries.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='pne.jpg') }}" alt="Pneumonia Detection Illustration">
+                <h3>Pneumonia Disease</h3>
+                <p>
+Pneumonia is caused by infections from bacteria, viruses, or fungi, often following respiratory infections. It affects around 450 million people annually, accounting for about 2.5 million deaths, especially impacting young children and the elderly worldwide.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='Breast_Cancer.png') }}" alt="Breast Cancer Screening Illustration">
+                <h3>Breast Cancer Disease</h3>
+                <p>
+Breast cancer is caused by genetic mutations, hormonal factors, age, and lifestyle choices. It affects about 2.3 million women annually, representing 11.7% of all cancer cases globally, making it the most common cancer among women.</p>
+            </div>
+        </div>
+    </section>
+ <section class="additional-section">
+        <div class="additional-container">
+            <div class="additional-image-section">
+                <img src="{{ url_for('static', filename='serimg.png') }}" alt="Health Analysis Illustration">
+            </div>
+            <div class="additional-content-section">
+                <h1>Advanced Health Analysis</h1>
+                <p>Our platform provides detailed health analysis using the latest technology to help you stay informed and proactive about your health.</p>
+                <div class="additional-stats">
+                    <div class="stat">
+                        <h2>90%</h2>
+                        <p>Accuracy in disease prediction</p>
+                    </div>
+                    <div class="stat">
+                        <h2>24/7</h2>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 MDDS. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Show content after opening animation
+        window.addEventListener("load", () => {
+            document.body.classList.add("loaded");
+        });
+    </script>
+</body>
+
+</html>

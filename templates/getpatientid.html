@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Patient ID - MDDS</title>
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #f5f7fa;
+            --error-color: #e74c3c;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            perspective: 1000px;
+        }
+
+        /* Header Styles */
+        #header {
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        #MDDS {
+            color: white;
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .animate-title {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(142, 68, 173, 0.7);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(142, 68, 173, 1), 0 0 20px rgba(231, 76, 60, 0.7);
+            }
+        }
+
+        .nav_links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav_links p {
+            margin: 0;
+        }
+
+        .nav_links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav_links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav_links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav_links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Styles */
+        .page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transform: rotateX(5deg);
+            transition: transform 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .container:hover {
+            transform: rotateX(0deg) scale(1.02);
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotateX(5deg) translateY(0px);
+            }
+            50% {
+                transform: rotateX(5deg) translateY(-10px);
+            }
+            100% {
+                transform: rotateX(5deg) translateY(0px);
+            }
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 32px;
+            position: relative;
+            transform: translateZ(40px);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+            transform: translateZ(20px);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 16px;
+            transform: translateZ(15px);
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: var(--transition);
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transform: translateZ(25px);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(142, 68, 173, 0.2);
+            transform: translateZ(30px);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary-color), #9b59b6);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 6px 12px rgba(142, 68, 173, 0.3);
+            transform: translateZ(35px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateZ(35px) translateY(-5px);
+            box-shadow: 0 15px 25px rgba(142, 68, 173, 0.4);
+        }
+
+        button:active {
+            transform: translateZ(35px) translateY(0);
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: var(--transition);
+            min-height: 24px;
+            transform: translateZ(15px);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .success {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--secondary-color);
+            border-left: 5px solid var(--secondary-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        .error {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--error-color);
+            border-left: 5px solid var(--error-color);
+        }
+
+        .info {
+            background-color: rgba(142, 68, 173, 0.1);
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 25px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), #9b59b6);
+            border-radius: 50%;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            box-shadow: 0 8px 16px rgba(142, 68, 173, 0.4);
+            position: relative;
+            transform: translateZ(50px);
+            animation: spin 20s linear infinite;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translateZ(50px) rotateY(0deg);
+            }
+            100% {
+                transform: translateZ(50px) rotateY(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #header {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .nav_links {
+                margin-top: 15px;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            .page-wrapper {
+                padding-top: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1 id="MDDS" class="animate-title">MDDS</h1>
+        <nav class="nav_links">
+            <p><a href="{{ url_for('home') }}">Home</a></p>
+            <p><a href="{{ url_for('find_patient') }}">Know patient id</a></p>
+            <p><a href="{{ url_for('services') }}">Services</a></p>
+        </nav>
+    </header>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="logo">
+                <i>&#128100;</i>
+            </div>
+            <h2>Find Your Patient ID</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
+            </div>
+            <button onclick="fetchPatientID()">Retrieve Patient ID</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Add mouse movement parallax effect
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.container');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Reset transform when mouse leaves
+        document.addEventListener('mouseleave', function() {
+            const container = document.querySelector('.container');
+            container.style.transform = 'rotateX(5deg)';
+        });
+
+        function fetchPatientID() {
+            const username = document.getElementById("username").value;
+            const resultElement = document.getElementById("result");
+
+            resultElement.className = "";
+
+            if (!username) {
+                resultElement.textContent = "Please enter a username to continue.";
+                resultElement.className = "error";
+                return;
+            }
+
+            // Show loading state
+            resultElement.textContent = "Retrieving your patient ID...";
+            resultElement.className = "info";
+
+            // Fetch the patient ID
+            fetch(`/get_patient_id/${username}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.patient_id) {
+                        resultElement.textContent = "Patient ID: " + data.patient_id;
+                        resultElement.className = "success";
+                    } else {
+                        resultElement.textContent = "Error: " + data.error;
+                        resultElement.className = "error";
+                    }
+                })
+                .catch(error => {
+                    resultElement.textContent = "An error occurred while connecting to the server. Please try again later.";
+                    resultElement.className = "error";
+                    console.error("Error:", error);
+                });
+        }
+
+        // Allow pressing Enter to submit
+        document.getElementById("username").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                fetchPatientID();
+            }
+        });
+    </script>
+</body>
+</html>

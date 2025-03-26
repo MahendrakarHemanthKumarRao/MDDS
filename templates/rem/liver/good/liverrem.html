@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Recommendations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #6c5ce7;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+       .btn {
+            background-color: #ffffff;
+            color: #6c5ce7;
+            border: 1px solid #6c5ce7;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #6c5ce7;
+            color: white;
+        }
+
+
+        .container {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            margin: 0 auto 10px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: #6c5ce7;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Liver Recommendations</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="title">Liver Health Recommendations</h1>
+        <div class="card-container">
+            <div class="card" data-url="{{ url_for('liverfoodremg') }}">
+                <div class="card-icon">🍇</div>
+                <h2>Food & Nutrition</h2>
+                <p>Explore a healthy diet for liver support.</p>
+            </div>
+            <div class="card" data-url="{{ url_for('liverexeremg') }}">
+                <div class="card-icon">💪</div>
+                <h2>Exercise</h2>
+                <p>Discover exercises that promote liver health.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved.Liver Recommendations</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                card.addEventListener("click", () => {
+                    window.location.href = card.dataset.url;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

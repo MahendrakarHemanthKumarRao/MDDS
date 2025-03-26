@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    padding: 20px 0;
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.container1, .container {
+    width: 85%;
+    max-width: 650px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.container:hover, .container1:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+label {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
+    background-color: #fff;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #004c99;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #d9534f;
+    font-weight: 500;
+}
+
+/* Popup and overlay styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 999;
+    backdrop-filter: blur(3px);
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+    min-width: 300px;
+    max-width: 450px;
+    text-align: center;
+}
+
+#popup h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+#popup p {
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#popup button {
+    padding: 10px 20px;
+    margin: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#popup button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+#popup button:first-of-type:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#popup button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+#popup button:last-of-type:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container1, .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input[type="number"], input[type="text"] {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+    }
+}
+
+/* Style for the fetch data button */
+#patientForm button {
+    padding: 12px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: 600;
+}
+
+#patientForm button:hover {
+    background-color: #004c99;
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+</style>
+</head>
+<body>
+<!-- Background video -->
+    <video autoplay muted loop id="background-video">
+        <source src="{{ url_for('static', filename='video/heart.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container1">
+        <h1>Heart Disease Prediction</h1>
+        <!-- Patient Form -->
+        <form id="patientForm" class="form">
+            <div class="form-group">
+                <label for="patient_id">Patient ID:</label>
+                <input type="text" id="patient_id" name="patient_id" placeholder="Enter Patient ID">
+                <button type="button" onclick="fetchPatientData()"
+            style="padding: 10px; font-size: 16px; color: #fff; background-color: #007bff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s, transform 0.3s;">
+        Fetch Data
+    </button>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" readonly>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>Heart Disease Prediction</h1>
+        <form id="predictionForm" class="form">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex (0 for female, 1 for male):</label>
+                <input type="number" id="sex" name="sex" required min="0" max="1">
+            </div>
+            <div class="form-group">
+                <label for="cp">Chest Pain Type (0-3):</label>
+                <input type="number" id="cp" name="cp" required min="0" max="3">
+            </div>
+            <div class="form-group">
+                <label for="trestbps">Resting Blood Pressure:</label>
+                <input type="number" id="trestbps" name="trestbps" required>
+            </div>
+            <div class="form-group">
+                <label for="chol">Cholesterol:</label>
+                <input type="number" id="chol" name="chol" required>
+            </div>
+            <div class="form-group">
+                <label for="fbs">Fasting Blood Sugar > 120 mg/dl (1 = true; 0 = false):</label>
+                <input type="number" id="fbs" name="fbs" required min="0" max="1">
+            </div>
+            <div class="form-group">
+                <label for="restecg">Resting ECG Results (0-2):</label>
+                <input type="number" id="restecg" name="restecg" required min="0" max="2">
+            </div>
+            <div class="form-group">
+                <label for="thalach">Max Heart Rate Achieved:</label>
+                <input type="number" id="thalach" name="thalach" required>
+            </div>
+            <div class="form-group">
+                <label for="exang">Exercise Induced Angina (1 = yes; 0 = no):</label>
+                <input type="number" id="exang" name="exang" required min="0" max="1">
+            </div>
+            <div class="form-group">
+                <label for="oldpeak">ST Depression:</label>
+                <input type="number" id="oldpeak" name="oldpeak" required step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="slope">Slope of Peak Exercise ST Segment (0-2):</label>
+                <input type="number" id="slope" name="slope" required min="0" max="2">
+            </div>
+            <div class="form-group">
+                <label for="ca">Number of Major Vessels (0-3):</label>
+                <input type="number" id="ca" name="ca" required min="0" max="3">
+            </div>
+            <div class="form-group">
+                <label for="thal">Thalassemia (0 = normal; 1 = fixed defect; 2 = reversible defect):</label>
+                <input type="number" id="thal" name="thal" required min="0" max="2">
+            </div>
+            <input type="submit" value="Generate and Download Report" class="btn">
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <!-- Popup and overlay -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h2>Report Generated</h2>
+        <p>Your report has been successfully generated.</p>
+        <b></b><p>Doctor Recommendation: You should consult a doctor for further analysis.</p></b>
+        <button class="primary" onclick="redirectToNextPage()">View Recommendations</button>
+        <button class="secondary" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('/predict/heart', {  // Ensure the URL matches the Flask route
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {throw new Error(text)});
+                }
+                return response.blob();  // Handle the PDF file
+            })
+            .then(blob => {
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'heart_disease_prediction_report.pdf';  // Set the desired file name
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+                // Display the popup
+                showPopup();
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = error.message;
+            });
+        });
+
+        function showPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+            location.reload();
+        }
+
+        function redirectToNextPage(isDiseasePredicted) {
+    if (isDiseasePredicted) {
+        // Redirect to a page with recommendations for heart disease
+        window.location.href = "{{ url_for('heartremgood') }}"; // Replace with your actual route
+    } else {
+        // Redirect to a page with general health tips or no disease recommendations
+        window.location.href = "{{ url_for('heartrembad') }}"; // Replace with your actual route
+    }
+}
+    function fetchPatientData() {
+    const patientId = document.getElementById('patient_id').value;
+
+    if (!patientId) {
+        alert("Please enter a Patient ID");
+        return;
+    }
+
+    fetch('/get_patient_data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ patient_id: patientId }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Fetched data from API:", data);  // Debugging
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        // Ensure that null values do not cause issues and convert float to integer
+        document.getElementById('name').value = data.name || '';
+        document.getElementById('age').value = Math.round(data.age) || '';
+        document.getElementById('sex').value = data.gender ?? '';
+        document.getElementById('cp').value = Math.round(data.cp) || '';
+        document.getElementById('trestbps').value = Math.round(data.trestbps) || '';
+        document.getElementById('chol').value = Math.round(data.chol) || '';
+        document.getElementById('fbs').value = data.fbs ?? '';
+        document.getElementById('restecg').value = Math.round(data.restecg) || '';
+        document.getElementById('thalach').value = Math.round(data.thalach) || '';
+        document.getElementById('exang').value = data.exang ?? '';
+        document.getElementById('oldpeak').value = Math.round(data.oldpeak) || '';
+        document.getElementById('slope').value = Math.round(data.slope) || '';
+        document.getElementById('ca').value = Math.round(data.ca) || '';
+        document.getElementById('thal').value = data.thal ?? '';
+    })
+    .catch(error => {
+        console.error("Fetch error:", error);
+        alert("Failed to fetch patient data.");
+    });
+}
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Nutrition Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #34a853;
+            --secondary-color: #34a853;
+            --header-footer-color: #34a853;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #34a853;
+            border: 1px solid #34a853;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #34a853;
+            color: white;
+        }
+
+
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Brain Tumor Nutrition Guide</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('btback') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Brain Tumor Nutrition Section -->
+        <div class="section">
+            <h2>Nutritional Recommendations for Brain Tumor Patients</h2>
+            <p>For individuals with brain tumors, proper nutrition plays a key role in supporting brain health, reducing inflammation, and enhancing overall well-being. Here are some food recommendations:</p>
+            <ul>
+                <li><strong>Balanced Diet:</strong> Focus on whole foods that are rich in essential nutrients.</li>
+                <li><strong>Fruits and Vegetables:</strong> Aim for a variety of colorful fruits and vegetables (like leafy greens, berries, broccoli, carrots) which are high in antioxidants, vitamins, and minerals.</li>
+                <ul>
+                    <li>Examples: Leafy greens (spinach, kale), berries (blueberries, strawberries), broccoli, carrots.</li>
+                </ul>
+                <li><strong>Whole Grains:</strong> Include whole grains like brown rice, oats, quinoa, and whole wheat to support energy needs and fiber intake.</li>
+                <ul>
+                    <li>Examples: Brown rice, oats, quinoa, whole wheat bread.</li>
+                </ul>
+                <li><strong>Protein:</strong> Choose lean sources of protein such as fish, chicken, tofu, legumes, and nuts to maintain muscle mass and support tissue repair.</li>
+                <ul>
+                    <li>Examples: Fish (salmon, mackerel), chicken, tofu, legumes, nuts.</li>
+                </ul>
+                <li><strong>Healthy Fats:</strong> Include sources of omega-3 fatty acids such as fish (salmon, mackerel), flaxseeds, and walnuts, as they support brain health.</li>
+                <ul>
+                    <li>Examples: Salmon, mackerel, flaxseeds, walnuts, avocado.</li>
+                </ul>
+                <li><strong>Fiber-Rich Foods:</strong> Helps prevent constipation and support digestive health.</li>
+                <ul>
+                    <li>Examples: Whole grains, legumes, fruits, and vegetables.</li>
+                </ul>
+                <li><strong>Vitamin & Mineral Supplements:</strong> Ensure adequate intake of vitamins like B vitamins (B12, B6), vitamin D, magnesium, zinc, and iron.</li>
+            </ul>
+        </div>
+
+        <!-- Hydration Section -->
+        <div class="section">
+            <h2>Hydration</h2>
+            <p>Staying hydrated is crucial for brain tumor patients as it helps maintain overall health and cognitive function:</p>
+            <ul>
+                <li>Water Intake: Stay well-hydrated by drinking plenty of water throughout the day.</li>
+                <li>Herbal Teas: Consider mild herbal teas like chamomile or ginger, but avoid caffeinated beverages that might be dehydrating.</li>
+            </ul>
+        </div>
+
+        <!-- Immune-Boosting Foods Section -->
+        <div class="section">
+            <h2>Immune-Boosting Foods</h2>
+            <ul>
+                <li>Immune-Enhancing Nutrients:</li>
+                <ul>
+                    <li><strong>Vitamin C:</strong> Citrus fruits, bell peppers, and leafy greens.</li>
+                    <li><strong>Zinc:</strong> Found in seeds, nuts, and whole grains.</li>
+                    <li><strong>Vitamin D:</strong> From sunlight exposure, fortified foods like milk, or supplements if necessary.</li>
+                    <li><strong>Probiotics:</strong> Yogurt, kefir, and fermented foods to support gut health and immunity.</li>
+                    <li><strong>Garlic and Ginger:</strong> Both have anti-inflammatory and immune-boosting properties.</li>
+                </ul>
+            </ul>
+        </div>
+
+        <!-- Avoid Irritants Section -->
+        <div class="section">
+            <h2>Avoid Irritants</h2>
+            <ul>
+                <li>Refined Sugars and Processed Foods: Limit or avoid foods high in added sugars, as they can contribute to inflammation.</li>
+                <li>Excess Caffeine: Reduce consumption of caffeinated drinks that can increase anxiety and dehydration.</li>
+                <li>Artificial Additives and Preservatives: Avoid processed foods with artificial preservatives and additives.</li>
+                <li>Excess Saturated and Trans Fats: Reduce unhealthy fats from fried or processed foods.</li>
+                <li>Alcohol: Limit alcohol consumption as it may weaken the immune system.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Tips Section -->
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Small, Frequent Meals: Eating smaller portions more frequently can help manage nausea and energy levels.</li>
+                <li>Fresh, Organic Produce: Prefer organic produce when possible to reduce exposure to pesticides.</li>
+                <li>Consult a Nutritionist/Dietitian: Personalized nutrition advice can help cater to individual health needs and treatment plans.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Nutritionists Worldwide.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

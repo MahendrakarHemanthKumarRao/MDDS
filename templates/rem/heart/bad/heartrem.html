@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Recommendations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: #004d40;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+
+        }
+
+        .container {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            margin: 0 auto 10px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Heart Recommendations</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="title">Heart Recommendations</h1>
+        <div class="card-container">
+            <div class="card" data-url="{{ url_for('heartfoodremb') }}">
+                <div class="card-icon">🍎</div>
+                <h2>Food & Nutrition</h2>
+                <p>Discover the importance of a balanced diet.</p>
+            </div>
+            <div class="card" data-url="{{ url_for('heartexeremb') }}">
+                <div class="card-icon">💪</div>
+                <h2>Exercise</h2>
+                <p>Explore tips for staying active and fit.</p>
+            </div>
+            <div class="card" data-url="{{ url_for('heartdocremg') }}">
+                <div class="card-icon">👨‍⚕️</div>
+                <h2>Doctor Recommendation</h2>
+                <p>Get expert advice for a healthier lifestyle.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Heart Recommendations.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".card").forEach(card => {
+                card.addEventListener("click", () => {
+                    window.location.href = card.dataset.url;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendations for Heart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #004d40;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #00332e;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            background-color: #00221a;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+ footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Food Recommendations for Heart</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('heartbackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="section">
+        <h2>Whole Grains</h2>
+        <ul>
+            <li>Brown rice, quinoa, oatmeal, and whole-grain bread to provide fiber and improve heart health.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Leafy Green Vegetables</h2>
+        <ul>
+            <li>Spinach, kale, and broccoli rich in antioxidants and vitamins.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Fatty Fish</h2>
+        <ul>
+            <li>Salmon, mackerel, and sardines, which are high in omega-3 fatty acids to reduce inflammation and lower blood pressure.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Nuts and Seeds</h2>
+        <ul>
+            <li>Almonds, walnuts, chia seeds, and flaxseeds as sources of healthy fats and protein.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Legumes and Beans</h2>
+        <ul>
+            <li>Lentils, chickpeas, and black beans to add protein and fiber while maintaining low cholesterol levels.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Low-Fat Dairy</h2>
+        <ul>
+            <li>Yogurt and skim milk to ensure calcium intake without saturated fats.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Fruits</h2>
+        <ul>
+            <li>Berries, oranges, and apples, which are high in antioxidants and low in sugar.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Oils</h2>
+        <ul>
+            <li>Olive oil and avocado oil for cooking instead of saturated fats.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Herbs and Spices</h2>
+        <ul>
+            <li>Turmeric, garlic, ginger, and cinnamon to enhance flavor and provide health benefits.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Limit or Avoid</h2>
+        <ul>
+            <li>Processed foods, sugary beverages, red meat, fried foods, and excessive salt.</li>
+        </ul>
+    </div>
+
+
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized advice</li>
+                <li>Balance calorie intake with daily energy expenditure</li>
+                <li>Limit high-calorie, low-nutrition foods</li>
+                <li>Season foods with herbs, spices, and lemon juice instead of salt</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+ <footer>
+        <p>&copy; 2024 All Rights Reserved. Food Recommendations for Heart.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

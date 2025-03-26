@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MDDS Dashboard</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: .;
+        }
+        header {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .nav_links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav_links a {
+            text-decoration: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .nav_links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        .animate-title {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #8a2387 0%, #e94057 50%, #f27121 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleAnimation 2s infinite alternate;
+        }
+        @keyframes titleAnimation {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+        select, button {
+            font-size: 16px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        form {
+            padding: 20px;
+            text-align: center;
+        }
+        img {
+            display: block; /* Centers the image instead of having it inline */
+            max-width: 100%; /* Limits the image to the maximum width of its container */
+            height: auto; /* Maintains the aspect ratio */
+            margin: 20px auto; /* Adds top and bottom margin, and auto for horizontal */
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #e74c3c; /* Bright red color */
+            margin: 20px 0;
+        }
+        footer {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1 id="MDDS" class="animate-title">MDDS</h1>
+        <nav class="nav_links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <h1>Disease Prediction Graph Viewer</h1>
+    <form action="{{ url_for('dashboard') }}" method="post">
+        <select name="disease">
+            <option value="">Select a Disease</option>
+            {% for disease in diseases %}
+                <option value="{{ disease }}">{{ disease }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Show Graph</button>
+    </form>
+
+    {% if image_path %}
+    <img src="{{ image_path }}" alt="Disease Distribution">
+    {% endif %}
+
+    <footer>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+        <p>© 2024 A - 09. All rights reserved.</p>
+    </footer>
+</body>
+</html>

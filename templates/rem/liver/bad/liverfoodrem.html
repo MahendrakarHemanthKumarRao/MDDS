@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendations for Liver</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --header-footer-color: #6c5ce7;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+       .btn {
+            background-color: #ffffff;
+            color: #6c5ce7;
+            border: 1px solid #6c5ce7;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #6c5ce7;
+            color: white;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Food Recommendations for Liver</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('liverbackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+<div class="container">
+
+    <div class="section">
+        <h2>High-Fiber Foods</h2>
+        <ul>
+            <li>Oats</li>
+            <li>Whole grains (brown rice, quinoa)</li>
+            <li>Fruits like apples, pears, and berries</li>
+            <li>Vegetables like carrots, broccoli, and leafy greens</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Lean Protein Sources</h2>
+        <ul>
+            <li>Skinless chicken or turkey</li>
+            <li>Fish like salmon, mackerel, or sardines (rich in omega-3)</li>
+            <li>Plant-based proteins like lentils, chickpeas, and tofu</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Fats</h2>
+        <ul>
+            <li>Avocados</li>
+            <li>Nuts and seeds (in moderation)</li>
+            <li>Olive oil</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Low-Sodium Foods</h2>
+        <ul>
+            <li>Avoid processed foods and canned goods</li>
+            <li>Focus on fresh, homemade meals</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Hydration</h2>
+        <ul>
+            <li>Plenty of water</li>
+            <li>Herbal teas like green tea or chamomile</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Foods to Avoid</h2>
+        <ul>
+            <li>Alcohol</li>
+            <li>Fried and fatty foods</li>
+            <li>Sugary snacks and desserts</li>
+            <li>Red meat</li>
+        </ul>
+    </div>
+
+
+
+
+
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized liver health advice</li>
+                <li>Limit alcohol consumption to protect liver function</li>
+                <li>Stay active with regular exercise</li>
+                <li>Manage stress through relaxation techniques</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Food Recommendations for Liver</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

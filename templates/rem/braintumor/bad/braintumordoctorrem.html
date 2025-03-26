@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Brain Tumor Specialists in India</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            background-color: #34a853;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #34a853;
+            border: 1px solid #34a853;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #34a853;
+            color: white;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            margin-bottom: 80px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #2d3436;
+            font-size: 1.4em;
+        }
+        .card p {
+            margin: 8px 0;
+            color: #636e72;
+        }
+        .card .specialty {
+            font-weight: bold;
+            color: #34a853;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #34a853;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Top Brain Tumor Specialists in India</h1>
+    <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('btbackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+</header>
+<div class="grid">
+    <div class="card">
+        <h2>Dr. Mazhar Husain</h2>
+        <p class="specialty">Chairman & Chief Neurosurgeon</p>
+        <p>Neurosurgery, Neuro-Oncology, Spine Surgery</p>
+        <p>Experience: 50+ Years</p>
+        <p>Gender: Male</p>
+    </div>
+    <div class="card">
+        <h2>Dr. (Col) Joy Dev Mukherji</h2>
+        <p class="specialty">Vice Chairman & Head- Neurology</p>
+        <p>Neurosciences, Neurology</p>
+        <p>Experience: 29+ Years</p>
+        <p>Gender: Male</p>
+    </div>
+    <div class="card">
+        <h2>Dr. Atul Prasad</h2>
+        <p class="specialty">Vice Chairman & HOD</p>
+        <p>Neurology, Neurosciences, Interventional Neurology</p>
+        <p>Experience: 39+ Years</p>
+        <p>Gender: Male</p>
+    </div>
+    <div class="card">
+        <h2>Dr. Puneet Agarwal</h2>
+        <p class="specialty">Principal Director - Stroke and Dementia</p>
+        <p>Neurosciences, Neurology</p>
+        <p>Experience: 24+ Years</p>
+        <p>Gender: Male</p>
+    </div>
+    <div class="card">
+        <h2>Prof. (Col.) Dr. Bipin Walia</h2>
+        <p class="specialty">Vice Chairman & Head- Neurosurgery for Max Saket Complex & Vice Chairman- Neurospine, Max Saket</p>
+        <p>Neurosciences, Neurosurgery, Spine Surgery</p>
+        <p>Experience: 27+ Years</p>
+        <p>Gender: Male</p>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2024 All Rights Reserved. Top Brain Tumor Specialists in India.</p>
+    <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+</footer>
+</body>
+</html>

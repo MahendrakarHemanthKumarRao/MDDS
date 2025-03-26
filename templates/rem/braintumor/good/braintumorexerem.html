@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Exercise Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #34a853;
+            --secondary-color: #34a853;
+            --header-footer-color: #34a853;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #34a853;
+            border: 1px solid #34a853;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0 5px; /* Space between buttons */
+        }
+        .btn:hover {
+            background-color: #34a853;
+            color: white;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .exercise-img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+         footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Breast Cancer Exercise Recommendations</h1>
+         <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('btbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Breast Cancer Exercise Recommendations Section -->
+        <div class="section">
+            <h2>Exercise Recommendations for Breast Cancer</h2>
+            <p>Physical activity plays a crucial role in the recovery and overall well-being of individuals diagnosed with breast cancer. Below are some recommended exercises that can support the healing process:</p>
+            
+                    <!-- Sirsasana Section -->
+        <div>
+            <h3>Sirsasana (Headstand)</h3>
+            <img src="{{ url_for('static', filename='braintumor/sirsasana.png') }}" alt="Sirsasana - Headstand" class="exercise-img">
+            <p>Improves blood flow to the brain, enhancing oxygen supply and reducing stress.</p>
+        </div>
+
+        <!-- Sarvangasana Section -->
+        <div>
+            <h3>Sarvangasana (Shoulder Stand)</h3>
+            <img src="{{ url_for('static', filename='braintumor/sarvangasana.jpg') }}" alt="Sarvangasana - Shoulder Stand" class="exercise-img">
+            <p>Boosts circulation to the head, improving brain function and detoxification.</p>
+        </div>
+
+        <!-- Setu Bandhasana Section -->
+        <div>
+            <h3>Setu Bandhasana (Bridge Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/setubandhasana.jpg') }}" alt="Setu Bandhasana - Bridge Pose" class="exercise-img">
+            <p>Stimulates the thyroid and improves blood flow to the brain and neck area.</p>
+        </div>
+
+        <!-- Adho Mukha Svanasana Section -->
+        <div>
+            <h3>Adho Mukha Svanasana (Downward Dog Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/Adho-Mukha-Svanasana.jpg') }}" alt="Adho Mukha Svanasana - Downward Dog Pose" class="exercise-img">
+            <p>Increases oxygen flow to the brain, supporting mental clarity and focus.</p>
+        </div>
+
+        <!-- Trikonasana Section -->
+        <div>
+            <h3>Trikonasana (Triangle Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/trikonasana.jpg') }}" alt="Trikonasana - Triangle Pose" class="exercise-img">
+            <p>Enhances circulation to the brain and promotes overall well-being.</p>
+        </div>
+
+        <!-- Dhanurasana Section -->
+        <div>
+            <h3>Dhanurasana (Bow Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/dhanurasana.jpg') }}" alt="Dhanurasana - Bow Pose" class="exercise-img">
+            <p>Opens up the chest and stimulates the brain by improving oxygenation.</p>
+        </div>
+
+        <!-- Bhramari Pranayama Section -->
+        <div>
+            <h3>Bhramari Pranayama (Bee Breath)</h3>
+            <img src="{{ url_for('static', filename='braintumor/bhramaripranayama.jpg') }}" alt="Bhramari Pranayama - Bee Breath" class="exercise-img">
+            <p>Calms the mind and relieves mental stress, promoting relaxation and brain function.</p>
+        </div>
+
+        <!-- Anulom Vilom Section -->
+        <div>
+            <h3>Anulom Vilom (Alternate Nostril Breathing)</h3>
+            <img src="{{ url_for('static', filename='braintumor/Adho-Mukha-Svanasana.jpg') }}" alt="Anulom Vilom - Alternate Nostril Breathing" class="exercise-img">
+            <p>Balances the brain hemispheres, reducing anxiety and improving concentration.</p>
+        </div>
+
+        <!-- Bhujangasana Section -->
+        <div>
+            <h3>Bhujangasana (Cobra Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/bhujangasana.png') }}" alt="Bhujangasana - Cobra Pose" class="exercise-img">
+            <p>Relieves tension in the neck and shoulders while improving blood flow to the brain.</p>
+        </div>
+
+        <!-- Shavasana Section -->
+        <div>
+            <h3>Shavasana (Corpse Pose)</h3>
+            <img src="{{ url_for('static', filename='braintumor/shavasana.jpg') }}" alt="Shavasana - Corpse Pose" class="exercise-img">
+            <p>Relieves stress, helps clear the mind, and promotes deep relaxation.</p>
+        </div>
+    </div>
+</div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Nutritionists Worldwide.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

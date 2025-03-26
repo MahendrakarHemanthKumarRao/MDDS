@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Food Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #990066; /* Pink */
+            --secondary-color: #3498db; /* Blue */
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color); /* Pink */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: white;
+            color: var(--primary-color); /* Pink */
+            border: 1px solid var(--primary-color); /* Pink */
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: var(--primary-color); /* Pink */
+            color: white;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--primary-color); /* Pink */
+            border-bottom: 3px solid var(--primary-color); /* Pink */
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color); /* Blue */
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        footer {
+            background-color: var(--primary-color); /* Pink */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Breast Cancer Food Recommendation</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('bcbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+  <div class="container">
+    <!-- Fruits and Vegetables Section -->
+    <div class="section">
+        <h2>Fruits and Vegetables</h2>
+        <ul>
+            <li>Variety of fresh fruits (apples, oranges, bananas, berries).</li>
+            <li>Seasonal vegetables – ensure a mix of colors for diverse nutrients.</li>
+        </ul>
+    </div>
+
+    <!-- Whole Grains Section -->
+    <div class="section">
+        <h2>Whole Grains</h2>
+        <ul>
+            <li>Whole wheat bread, barley, farro – provide energy and essential nutrients.</li>
+        </ul>
+    </div>
+
+    <!-- Lean Proteins Section -->
+    <div class="section">
+        <h2>Lean Proteins</h2>
+        <ul>
+            <li>Skinless chicken, turkey, eggs.</li>
+            <li>Legumes and lentils for vegetarians.</li>
+        </ul>
+    </div>
+
+    <!-- Healthy Fats Section -->
+    <div class="section">
+        <h2>Healthy Fats</h2>
+        <ul>
+            <li>Avocados – support skin and heart health.</li>
+            <li>Nuts and seeds – excellent snack options.</li>
+        </ul>
+    </div>
+
+    <!-- Dairy Section -->
+    <div class="section">
+        <h2>Dairy</h2>
+        <ul>
+            <li>Low-fat or non-dairy alternatives (almond milk, soy milk).</li>
+        </ul>
+    </div>
+
+    <!-- Hydration Section -->
+    <div class="section">
+        <h2>Hydration</h2>
+        <ul>
+            <li>Water and natural juices without added sugars.</li>
+        </ul>
+    </div>
+
+    <!-- Foods to Enjoy in Moderation Section -->
+    <div class="section">
+        <h2>Foods to Enjoy in Moderation</h2>
+        <ul>
+            <li>Red meat (choose lean cuts).</li>
+            <li>Treats (dark chocolate is better than milk chocolate).</li>
+            <li>Coffee (stick to 1-2 cups per day).</li>
+        </ul>
+    </div>
+
+        <div class="section">
+            <h2>Additional Nutrition Tips</h2>
+            <ul>
+                <li>Drink plenty of water to stay hydrated and support body functions.</li>
+                <li>Limit processed foods and sugary drinks to reduce inflammation.</li>
+                <li>Incorporate a variety of colorful fruits and vegetables for a range of nutrients.</li>
+                <li>Consult with a dietitian for personalized dietary recommendations.</li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Breast Cancer Food Recommendation</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

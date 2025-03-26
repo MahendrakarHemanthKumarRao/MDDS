@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart-Healthy Nutrition Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #004d40;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #00332e;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            background-color: #00221a;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+ footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Heart-Healthy Nutrition Guide</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('heartback') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Fruits and Vegetables</h2>
+            <ul>
+                <li>Eat 5 or more servings per day</li>
+                <li>Good sources of fiber, vitamins, and minerals</li>
+                <li>Low in fat, calories, sodium, and cholesterol</li>
+                <li>Eat whole fruits instead of drinking juice for more fiber</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Grains</h2>
+            <ul>
+                <li>Choose whole-grain foods for at least half of daily grain intake</li>
+                <li>Sources: whole-wheat bread, brown rice, whole-grain cereals and pasta</li>
+                <li>Provide fiber, vitamins, minerals, and complex carbohydrates</li>
+                <li>Limit high-fat baked goods and refined grains</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Protein Sources</h2>
+            <ul>
+                <li>Good sources: fish, poultry, seafood, peas, lentils, nuts, eggs</li>
+                <li>Fish recommendations:
+                    <ul>
+                        <li>Eat at least 2 servings of low-mercury fish per week</li>
+                        <li>Cook by baking, broiling, roasting, steaming, boiling, or microwaving</li>
+                    </ul>
+                </li>
+                <li>Consider meatless meals and plant-based proteins</li>
+                <li>Dairy provides protein, calcium, and essential vitamins</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Fats and Cholesterol</h2>
+            <ul>
+                <li>Avoid saturated and trans fats</li>
+                <li>Saturated fat sources:
+                    <ul>
+                        <li>Animal products: butter, cheese, whole milk, fatty meats</li>
+                        <li>Coconut and palm oils</li>
+                    </ul>
+                </li>
+                <li>Avoid trans fats in:
+                    <ul>
+                        <li>Packaged snacks</li>
+                        <li>Hydrogenated or partially-hydrogenated oils</li>
+                        <li>Commercial baked goods</li>
+                    </ul>
+                </li>
+                <li>Choose soft margarine with vegetable oil as first ingredient</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized advice</li>
+                <li>Balance calorie intake with daily energy expenditure</li>
+                <li>Limit high-calorie, low-nutrition foods</li>
+                <li>Season foods with herbs, spices, and lemon juice instead of salt</li>
+            </ul>
+        </div>
+    </div>
+ <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Cardiologists in India.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

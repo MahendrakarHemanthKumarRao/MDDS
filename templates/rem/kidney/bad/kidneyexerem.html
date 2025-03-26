@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidney-Friendly Yoga Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d6d; /* Orange */
+            --secondary-color: #3498db; /* Blue */
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color); /* Orange */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: white;
+            color: var(--primary-color); /* Orange */
+            border: 1px solid var(--primary-color); /* Orange */
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: var(--primary-color); /* Orange */
+            color: white;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--primary-color); /* Orange */
+            border-bottom: 3px solid var(--primary-color); /* Orange */
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color); /* Blue */
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .exercise {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .exercise img {
+            width: 350px;
+            height: 200px;
+            border-radius: 10px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107; /* Yellow */
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--primary-color); /* Orange */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Kidney-Friendly Yoga Guide</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('kidneybackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Yoga Poses for Kidney Health</h2>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/bhujangasana.jpg') }}" alt="Bhujangasana (Cobra Pose)">
+                <div>
+                    <strong>Bhujangasana (Cobra Pose):</strong> Stimulates kidney function and improves blood circulation to the abdominal region.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/ardha matsyendrasana.jpg') }}" alt="Ardha Matsyendrasana (Half Spinal Twist Pose)">
+                <div>
+                    <strong>Ardha Matsyendrasana (Half Spinal Twist Pose):</strong> Promotes detoxification and improves kidney efficiency.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/paschimottanasana.jpg') }}" alt="Paschimottanasana (Seated Forward Bend)">
+                <div>
+                    <strong>Paschimottanasana (Seated Forward Bend):</strong> Enhances kidney function by stimulating the abdominal organs.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/dhanurasana.jpg') }}" alt="Dhanurasana (Bow Pose)">
+                <div>
+                    <strong>Dhanurasana (Bow Pose):</strong> Activates the kidneys and helps eliminate toxins.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/malasana.jpg') }}" alt="Malasana (Garland Pose)">
+                <div>
+                    <strong>Malasana (Garland Pose):</strong> Improves digestion and stimulates kidney and bladder function.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/ustrasana.jpg') }}" alt="Ustrasana (Camel Pose)">
+                <div>
+                    <strong>Ustrasana (Camel Pose):</strong> Opens the abdominal area, boosting kidney energy and function.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/shalabhanasana.jpg') }}" alt="Shalabhasana (Locust Pose)">
+                <div>
+                    <strong>Shalabhasana (Locust Pose):</strong> Strengthens the lower back and stimulates the kidneys.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/kapalabatti.png') }}" alt="Kapalabhati (Skull Shining Breathing)">
+                <div>
+                    <strong>Kapalabhati (Skull Shining Breathing):</strong> Detoxifies the body and promotes better kidney health.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/anulom vilom.jpg') }}" alt="Anulom Vilom (Alternate Nostril Breathing)">
+                <div>
+                    <strong>Anulom Vilom (Alternate Nostril Breathing):</strong> Balances body fluids and improves overall kidney function.
+                </div>
+            </div>
+            <div class="exercise">
+                <img src="{{ url_for('static', filename='kidney/walking.jpg') }}" alt="Walking">
+                <div>
+                    <strong>Walking:</strong> Enhances blood flow to the kidneys and supports natural detoxification.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Nephrologists in India.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

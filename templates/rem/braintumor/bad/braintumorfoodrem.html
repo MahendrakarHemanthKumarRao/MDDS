@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Food Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #34a853;
+            --secondary-color: #34a853;
+            --header-footer-color: #34a853;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #34a853;
+            border: 1px solid #34a853;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #34a853;
+            color: white;
+        }
+
+
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Brain Tumor Food Recommendation</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('btbackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+<div class="container">
+    <div class="section">
+        <h2>Anti-inflammatory Foods</h2>
+        <ul>
+            <li>Turmeric (contains curcumin) – helps reduce inflammation.</li>
+            <li>Fatty fish (e.g., salmon, mackerel, sardines) – rich in omega-3 fatty acids, which help reduce inflammation and may promote brain health.</li>
+            <li>Berries (e.g., blueberries, strawberries) – rich in antioxidants, which can help protect brain cells from damage.</li>
+            <li>Healthy fats (e.g., olive oil, avocados, nuts) – essential for brain health and providing anti-inflammatory effects.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>High-fiber Foods</h2>
+        <ul>
+            <li>Whole grains (e.g., quinoa, brown rice, oats) – fiber helps in digestion and regulates blood sugar.</li>
+            <li>Legumes (e.g., lentils, chickpeas) – full of protein and fiber.</li>
+            <li>Leafy greens (e.g., spinach, kale, collard greens) – rich in vitamins, antioxidants, and folate, which support brain health.</li>
+            <li>Hydration (e.g., drink plenty of water and green tea) – helps with detoxification and hydration.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Foods to Avoid</h2>
+        <ul>
+            <li>Processed meats and refined sugars.</li>
+            <li>High-sodium or high-fat foods.</li>
+            <li>Alcohol and sugary beverages.</li>
+        </ul>
+    </div>
+
+
+
+        <!-- Additional Tips Section -->
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Small, Frequent Meals: Eating smaller portions more frequently can help manage nausea and energy levels.</li>
+                <li>Fresh, Organic Produce: Prefer organic produce when possible to reduce exposure to pesticides.</li>
+                <li>Consult a Nutritionist/Dietitian: Personalized nutrition advice can help cater to individual health needs and treatment plans.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Brain Tumor Food Recommendation</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

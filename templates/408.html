@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERROR</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #lottie-container, #image-container {
+            display: none;
+        }
+
+        #lottie-container.active {
+            display: block;
+        }
+
+        #image-container.active {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #image-container.active img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Header Styles */
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.8), rgba(255, 0, 150, 0.8));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Title Animation */
+        #MDDS {
+            font-size: 2.5em;
+            margin: 0;
+            color: #fff;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation Links Styles */
+        .nav_links {
+            display: flex;
+            gap: 30px; /* Spacing between buttons */
+            align-items: center; /* Center vertically */
+        }
+
+        .nav_links p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .nav_links a {
+            text-decoration: none;
+            color: #fff; /* Text color */
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: #007bff; /* Button background color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            perspective: 1000px; /* 3D effect */
+        }
+
+        .nav_links a:hover {
+            transform: translateY(-5px) scale(1.05); /* Lift effect */
+            background: #0056b3; /* Hover background color */
+        }
+
+        .nav_links a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav_links a:hover:before {
+            opacity: 1; /* Show background on hover */
+        }
+
+        /* Active state for buttons */
+        .nav_links a:active {
+            transform: translateY(2px); /* Press effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+            background: #004085; /* Active background color */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #diagnomix {
+                font-size: 2em;
+            }
+
+            .nav_links p {
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header" class="active">
+        <h1 id="MDDS" class="animate-title">MDDS</h1>
+        <nav class="nav_links">
+            <p><a href="{{ url_for('home') }}">Home</a></p>
+            <p><a href="{{ url_for('services') }}">Services</a></p>
+            <p><a href="{{ url_for('about') }}">About</a></p>
+            <p><a href="{{ url_for('contact') }}">Contact</a></p>
+            <p><a href="{{ url_for('logout') }}">Logout</a></p>
+        </nav>
+    </header>
+
+    <div id="lottie-container" class="active">
+        <lottie-player
+            src="https://lottie.host/a4537d8f-b339-4871-bd44-9040d717ef6e/HObNGQXaok.json"
+            background="transparent"
+            speed="1"
+            style="width: 400px; height: 300px;"
+            loop
+            autoplay>
+        </lottie-player>
+    </div>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename='408.jpg') }}" alt="Image after animation">
+    </div>
+
+    <script>
+        // Show header after a delay
+        setTimeout(() => {
+            document.getElementById('header').classList.add('active');
+        }, 1000);
+
+        // Switch between animation and image after 20 seconds
+        setTimeout(() => {
+            document.getElementById('lottie-container').classList.remove('active');
+            document.getElementById('image-container').classList.add('active');
+        }, 20000);
+    </script>
+</body>
+</html>

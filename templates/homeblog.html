@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDDS</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <!-- Lottie player for animations -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        /* Basic styles for body */
+        body {
+    font-family: Arial, sans-serif; /* Font family for the entire page */
+    background-color: #121212; /* Dark background color */
+    color: #FFFFFF; /* Changed text color to white */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    min-height: 100vh; /* Minimum height of the page */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children vertically */
+}
+
+        /* Styles for the opening animation overlay */
+        #opening-animation {
+            position: fixed; /* Fixed positioning */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            width: 100%; /* Full width */
+            height: 50%; /* Full height */
+            display: flex; /* Flexbox layout */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: #FFFFFF; /* Background color while animation plays */
+            z-index: 1000; /* Ensure it covers everything else */
+        }
+
+        /* Styles for the header */
+        #header {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a); /* Gradient background */
+            color: #e0e0e0; /* Text color */
+            padding: 15px; /* Padding around header */
+            font-weight: bold; /* Bold text */
+            text-align: center; /* Center text */
+            border-bottom: 3px solid #3B7CBB; /* Bottom border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
+        }
+
+        /* Styles for the hero section */
+        .hero {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+            justify-content: space-between; /* Space between items */
+            padding: 10px 0; /* Padding for the section */
+            background: #1a1a1a; /* Background color */
+            gap: 5px; /* Space between content */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 1s; /* Smooth fade-in transition */
+        }
+
+        /* Styles for hero content */
+        .hero-content {
+            flex: 1; /* Take available space */
+            padding-right: 10px; /* Right padding */
+        }
+
+        .hero-content h2 {
+            font-size: 6.5em; /* Large font size for heading */
+            margin-bottom: 10px; /* Space below heading */
+        }
+.hero-content p {
+    font-size: 1.3em; /* Adjust font size as needed */
+}
+        /* Styles for buttons in the hero section */
+        .hero .btn {
+            background: #1565C0; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 12px 24px; /* Padding for button */
+            border-radius: 5px; /* Rounded corners */
+            font-weight: bold; /* Bold text */
+            text-decoration: none; /* No underline */
+            transition: background 0.3s; /* Smooth background color transition */
+        }
+
+        .hero .btn:hover {
+            background: #0D47A1; /* Darker background on hover */
+        }
+
+        /* Styles for hero image */
+        .hero-image {
+            flex: 1; /* Take available space */
+            text-align: right; /* Align text to the right */
+        }
+
+        .hero-image img {
+            width: 100%; /* Full width image */
+            height: auto; /* Auto height */
+            max-width: 72%; /* Max width restriction */
+        }
+
+        /* Styles for the services section */
+        .services {
+    padding: 50px 0; /* Padding for the section */
+    text-align: center; /* Center text */
+    background: #121212; /* Background color */
+}
+
+        .services h2 {
+            font-size: 2em; /* Heading size */
+            margin-bottom: 10px; /* Space below heading */
+        }
+
+        .services p {
+    color: #FFFFFF; /* Changed text color to white */
+    margin-bottom: 40px; /* Space below paragraph */
+}
+
+        .services-grid {
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow wrapping of items */
+            gap: 20px; /* Space between service items */
+            justify-content: center; /* Center items */
+        }
+
+        /* Styles for individual service cards */
+        .service {
+            background: #1a1a1a; /* Background color */
+            padding: 20px; /* Padding for card */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Shadow effect */
+            max-width: 300px; /* Max width restriction */
+            text-align: left; /* Align text to the left */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transition effects */
+        }
+
+        .service:hover {
+            transform: scale(1.05); /* Scale up on hover */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Darker shadow on hover */
+        }
+
+        .service h3 {
+            font-size: 1.5em; /* Heading size */
+            margin-bottom: 10px; /* Space below heading */
+        }
+
+        .service p {
+            color: #bdbdbd; /* Text color */
+        }
+
+        .service img {
+            width: 100%; /* Full width image */
+            height: 150px; /* Fixed height */
+            object-fit: cover; /* Cover image without distortion */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below image */
+        }
+
+        /* Styles for the additional section */
+        .additional-section {
+            background: #1a1a1a; /* Background color */
+            padding: 50px 0; /* Padding for the section */
+        }
+
+        /* Container styles for additional content */
+        .additional-container {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+            gap: 50px; /* Space between items */
+        }
+
+        /* Styles for additional image */
+        .additional-image-section img {
+            max-width: 80%; /* Max width restriction */
+            height: auto; /* Auto height */
+            width: 100%; /* Full width */
+        }
+
+        /* Styles for additional content */
+        .additional-content-section {
+            flex: 1; /* Take available space */
+        }
+
+        .additional-content-section h1 {
+            font-size: 2em; /* Heading size */
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        .additional-content-section p {
+            color: #bdbdbd; /* Text color */
+            margin-bottom: 20px; /* Space below paragraph */
+        }
+
+        /* Styles for statistics display */
+        .additional-stats {
+            display: flex; /* Use flexbox for layout */
+            gap: 20px; /* Space between stats */
+        }
+
+        .stat {
+            background: #2a2a2a; /* Background color */
+            padding: 20px; /* Padding for stat box */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Shadow effect */
+            flex: 1; /* Take available space */
+            text-align: center; /* Center text */
+        }
+
+        .stat h2 {
+            font-size: 2em; /* Heading size */
+            margin-bottom: 10px; /* Space below heading */
+        }
+
+        .stat p {
+            color: #bdbdbd; /* Text color */
+        }
+
+        /* Styles for the footer */
+        footer {
+            background: #000000; /* Background color */
+            color: #c6d1e0; /* Text color */
+            padding: 20px; /* Padding for footer */
+            text-align: center; /* Center text */
+        }
+
+        /* Styles for navigation links */
+        .nav_links a {
+            color: #90CAF9; /* Link color */
+            text-decoration: none; /* No underline */
+            margin: 0 10px; /* Space between links */
+        }
+
+        .nav_links a:hover {
+            color: #E3F2FD; /* Color on hover */
+        }
+        .User.Count {
+            background-color: #fff; /* Change as needed */
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .user-count {
+            font-size: 1.5em;
+            color: green; /* You can change the color as per your theme */
+        }
+        /* Style for the opening animation */
+#opening-animation {
+    position: fixed; /* Ensure it stays on the screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    z-index: 1000; /* Ensure it overlays all other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Fallback background color */
+    overflow: hidden;
+}
+
+/* Video styling */
+#opening-animation video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire area */
+}
+
+/* Main content styling */
+#main-content {
+    display: none; /* Hide content initially */
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+}
+
+/* Ensure content is visible once the animation ends */
+body.loaded #opening-animation {
+    display: none; /* Hide the opening animation */
+}
+
+body.loaded #main-content {
+    display: block; /* Show the main content */
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Opening animation overlay -->
+<div id="opening-animation">
+    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+        <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+
+    <!-- Header section -->
+    <header id="header">
+        <h1 id="MDDS" class="animate-title">MDDS</h1>
+        <nav class="nav_links">
+            <p><a href="{{ url_for('homeblog') }}">Home</a></p>
+            <p><a href="{{ url_for('about1') }}">About</a></p>
+            <p><a href="{{ url_for('contact1') }}">Contact</a></p>
+            <p><a href="{{ url_for('loginhome') }}">Login</a></p>
+        </nav>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            <h2>Welcome to MDDS</h2>
+            <p>Our advanced platform offers comprehensive health analysis and disease prediction to help you stay informed and proactive about your health.</p>
+        </div>
+        <div class="hero-image">
+            <lottie-player
+                src="https://lottie.host/e46f4dad-1566-4534-ab30-36c75ce24301/6DOSnd6wbl.json"
+                background="transparent"
+                speed="1"
+                style="width: 100%; height: auto;"
+                loop
+                autoplay>
+            </lottie-player>
+        </div>
+    </section>
+
+        <!-- Services section -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <p>We provide a range of services to meet your healthcare needs.</p>
+        <div class="services-grid">
+            <div class="service">
+                <img src="{{ url_for('static', filename='heart.jpg') }}" alt="Heart Disease Prediction Illustration">
+                <h3>Heart Disease </h3>
+                <p>Heart disease is caused by factors like high blood pressure, cholesterol, smoking, poor diet, lack of exercise, and genetics. It accounts for 32% of global deaths, with higher rates in low- and middle-income countries.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='liver1.png') }}" alt="Liver Disease Detection Illustration">
+                <h3>Liver Disease </h3>
+                <p>Liver disease is caused by factors like viral infections, excessive alcohol consumption, obesity, and genetic disorders. It affects approximately 1 in 10 people globally, accounting for about 2% of all deaths, with rising prevalence in low-income regions.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='kidney.jpg') }}" alt="Kidney Health Analysis Illustration">
+                <h3>Kidney Disease</h3>
+                <p>Kidney disease is caused by diabetes, high blood pressure, glomerulonephritis, and urinary tract issues. It affects about 850 million people globally, accounting for roughly 1.5 million deaths annually, with increasing prevalence in low- and middle-income countries.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='pne.jpg') }}" alt="Pneumonia Detection Illustration">
+                <h3>Pneumonia Disease</h3>
+                <p>Pneumonia is caused by infections from bacteria, viruses, or fungi, often following respiratory infections. It affects around 450 million people annually, accounting for about 2.5 million deaths, especially impacting young children and the elderly worldwide.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='Breast_Cancer.jpeg') }}" alt="Breast Cancer Screening Illustration">
+                <h3>Breast Cancer Disease</h3>
+                <p>Breast cancer is caused by genetic mutations, hormonal factors, age, and lifestyle choices. It affects about 2.3 million women annually, representing 11.7% of all cancer cases globally, making it the most common cancer among women.</p>
+            </div>
+            <div class="service">
+                <img src="{{ url_for('static', filename='braintumor.jpeg') }}" alt="Brain Tumor Screening Illustration">
+                <h3>Brain Tumor Disease</h3>
+                <p>A brain tumor is an abnormal growth of cells in the brain, which can be benign or malignant. Causes include genetic mutations, radiation exposure, and family history. Over 8 million people die worldwide from brain tumors annually. Symptoms vary based on the tumor's size, location, and type. Treatment typically involves surgery, radiation, and chemotherapy. Early detection is crucial for better outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional information section -->
+    <section class="additional-section">
+        <div class="additional-container">
+            <div class="additional-image-section">
+                <img src="{{ url_for('static', filename='serimg.png') }}" alt="Health Analysis Illustration">
+            </div>
+            <div class="additional-content-section">
+                <h1>Advanced Health Analysis</h1>
+                <p>Our platform provides detailed health analysis using the latest technology to help you stay informed and proactive about your health.</p>
+                <div class="additional-stats">
+                    <div class="stat">
+                        <h2>90%</h2>
+                        <p>Accuracy in disease prediction</p>
+                    </div>
+                    <div class="stat">
+                        <h2>24/7</h2>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer section -->
+    <footer>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+        <p>© 2024 A - 09. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to hide the opening animation and show the main content
+        window.addEventListener('load', function () {
+            const openingAnimation = document.getElementById('opening-animation'); // Get the opening animation
+            const heroSection = document.getElementById('hero-section'); // Get the hero section
+
+            // Hide the animation after a delay of 4 seconds (4000 milliseconds)
+            setTimeout(() => {
+                openingAnimation.style.display = 'none'; // Hide the animation
+                heroSection.style.opacity = '1'; // Show the hero section smoothly
+            }, 4000);
+        });
+        // JavaScript to hide the opening animation, show the main content, and play audio
+    window.addEventListener('load', function () {
+        const openingAnimation = document.getElementById('opening-animation'); // Get the opening animation
+        const heroSection = document.getElementById('hero-section'); // Get the hero section
+        const audio = new Audio("{{ url_for('static', filename='welcome.mp3') }}"); // Reference to the audio file
+
+        // Hide the animation after a delay of 4 seconds (4000 milliseconds)
+        setTimeout(() => {
+            openingAnimation.style.display = 'none'; // Hide the animation
+            heroSection.style.opacity = '1'; // Show the hero section smoothly
+
+            // Play the audio
+            audio.play().catch((error) => {
+                console.error("Audio playback failed:", error);
+            });
+        }, 4000);
+    });
+    </script>
+</body>
+
+</html>

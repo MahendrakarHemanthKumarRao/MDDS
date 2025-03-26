@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Food Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --header-footer-color: #4169e1;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #4169e1;
+            border: 1px solid #4169e1;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0 5px; /* Space between buttons */
+        }
+        .btn:hover {
+            background-color: #4169e1;
+            color: white;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pneumonia Food Recommendation</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('pnbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+   <div class="container">
+    <!-- Fruits and Vegetables Section -->
+    <div class="section">
+        <h2>Fruits and Vegetables</h2>
+        <ul>
+            <li>Fresh fruits: Apples, berries, melons</li>
+            <li>Diverse vegetables: Carrots, sweet potatoes, bell peppers</li>
+        </ul>
+    </div>
+
+    <!-- Proteins Section -->
+    <div class="section">
+        <h2>Proteins</h2>
+        <ul>
+            <li>Lean meats, eggs, fish (rich in omega-3 fatty acids)</li>
+            <li>Plant proteins: Chickpeas, quinoa, tofu, or nuts</li>
+        </ul>
+    </div>
+
+    <!-- Grains Section -->
+    <div class="section">
+        <h2>Grains</h2>
+        <ul>
+            <li>Whole grains like brown rice, whole wheat, quinoa</li>
+            <li>Healthy cereals with minimal sugar</li>
+        </ul>
+    </div>
+
+    <!-- Healthy Fats Section -->
+    <div class="section">
+        <h2>Healthy Fats</h2>
+        <ul>
+            <li>Avocados, olive oil, nuts, and seeds</li>
+        </ul>
+    </div>
+
+    <!-- Dairy or Alternatives Section -->
+    <div class="section">
+        <h2>Dairy or Alternatives</h2>
+        <ul>
+            <li>Milk, yogurt, cheese, or plant-based alternatives like almond milk</li>
+        </ul>
+    </div>
+
+    <!-- Hydration Section -->
+    <div class="section">
+        <h2>Hydration</h2>
+        <ul>
+            <li>Water, fresh fruit juices, or infused water</li>
+        </ul>
+    </div>
+
+    <!-- Immune Support Foods Section -->
+    <div class="section">
+        <h2>Immune Support Foods</h2>
+        <ul>
+            <li>Garlic, ginger, and honey</li>
+        </ul>
+    </div>
+
+
+        <!-- Additional Tips Section -->
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized nutrition advice.</li>
+                <li>Limit alcohol consumption to protect liver function.</li>
+                <li>Stay active with regular exercise.</li>
+                <li>Manage stress through relaxation techniques.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Pneumonia Food Recommendation.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

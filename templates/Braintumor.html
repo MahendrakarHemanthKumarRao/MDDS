@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Predictor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add this CSS */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the background */
+    z-index: -1; /* Place the video behind all content */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s;
+}
+
+.container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+        body {
+             padding-top: 400px;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+
+        .card {
+            margin-top: 20px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control-file {
+            padding: 10px;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control-file:hover {
+            border-color: #007bff;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            display: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-container {
+            position: relative;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .preview-label {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        #result {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .result-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .result-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .popup-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .popup-button.primary {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .popup-button.secondary {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<video autoplay muted loop id="background-video">
+        <source src="{{ url_for('static', filename='video/brain.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1 class="text-center mb-4">Brain Tumor Predictor</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="brainTumorForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="age">Age:</label>
+                                <input type="number" class="form-control" id="age" name="age" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="imageUpload">Upload Brain MRI Image:</label>
+                                <input type="file" class="form-control-file" id="imageUpload" name="image"
+                                       accept="image/*" required>
+                                <small class="form-text text-muted">
+                                    Please upload a clear brain MRI image in JPG, PNG, or JPEG format.
+                                </small>
+                            </div>
+
+                            <div class="preview-container">
+                                <div class="preview-label d-none">Preview</div>
+                                <img id="imagePreview" src="#" alt="MRI preview">
+                            </div>
+
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <span id="submitText">Generate Report</span>
+                                    <span id="loadingSpinner" class="loading d-none"></span>
+                                </button>
+                            </div>
+                        </form>
+                        <div id="result" class="mt-3 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="popup">
+        <h2>Report Generated</h2>
+        <p>Your report has been successfully generated.</p>
+        <b></b><p>Doctor Recommendation: You should consult a doctor for further analysis.</p></b>
+        <button class="primary" onclick="redirectToNextPage()">View Recommendations</button>
+        <button class="secondary" onclick="closePopup()">Close</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result).show();
+                    $('.preview-label').removeClass('d-none');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imageUpload").change(function() {
+            readURL(this);
+        });
+
+        document.getElementById('brainTumorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            document.getElementById('submitText').textContent = 'Processing...';
+            document.getElementById('loadingSpinner').classList.remove('d-none');
+
+            var formData = new FormData(this);
+            var resultDiv = document.getElementById('result');
+            resultDiv.className = 'mt-3 text-center';
+
+            fetch('/predict/braintumor', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error ' + response.status);
+                }
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json().then(data => ({data, type: 'json'}));
+                } else if (contentType && contentType.includes('application/pdf')) {
+                    return response.blob().then(blob => ({data: blob, type: 'pdf'}));
+                } else {
+                    throw new Error('Unexpected content type: ' + contentType);
+                }
+            })
+            .then(({data, type}) => {
+                if (type === 'json') {
+                    resultDiv.innerHTML = 'Prediction: ' + data.prediction;
+                    resultDiv.classList.add('result-success');
+                } else if (type === 'pdf') {
+                    var url = window.URL.createObjectURL(data);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'brain_tumor_report.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    resultDiv.innerHTML = 'Report generated successfully!';
+                    resultDiv.classList.add('result-success');
+                    showPopup();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.innerHTML = 'Error: ' + error.message;
+                resultDiv.classList.add('result-error');
+            })
+            .finally(() => {
+                // Reset loading state
+                document.getElementById('submitText').textContent = 'Generate Report';
+                document.getElementById('loadingSpinner').classList.add('d-none');
+            });
+        });
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function redirectToNextPage(isDiseasePredicted) {
+            if (isDiseasePredicted) {
+        // Redirect to a page with recommendations for heart disease
+        window.location.href = "{{ url_for('btremdg') }}"; // Replace with your actual route
+    } else {
+        // Redirect to a page with general health tips or no disease recommendations
+        window.location.href = "{{ url_for('btremdb') }}"; // Replace with your actual route
+    }
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

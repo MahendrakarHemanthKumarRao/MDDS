@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver-Healthy Nutrition Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --header-footer-color: #6c5ce7;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--header-footer-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #ffffff;
+            color: #6c5ce7;
+            border: 1px solid #6c5ce7;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #6c5ce7;
+            color: white;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .exercise {
+            margin-bottom: 30px; /* Adding space between each exercise */
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Liver-Healthy Nutrition Guide</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('liverback') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Liver Exercise Recommendations</h2>
+
+            <div class="exercise">
+                <h3>1. Bhujangasana (Cobra Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/bhujangasana.png') }}" alt="Bhujangasana (Cobra Pose)">
+                </div>
+                <p>Stimulates liver function and promotes detoxification.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>2. Dhanurasana (Bow Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/dhanurasana.jpg') }}" alt="Dhanurasana (Bow Pose)">
+                </div>
+                <p>Improves blood flow to the liver, enhancing its health.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>3. Naukasana (Boat Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/naukasana.jpg') }}" alt="Naukasana (Boat Pose)">
+                </div>
+                <p>Strengthens the liver by stimulating abdominal organs.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>4. Ardha Matsyendrasana (Half Spinal Twist Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/ardha mateyendrasana.jpg') }}" alt="Ardha Matsyendrasana (Half Spinal Twist Pose)">
+                </div>
+                <p>Promotes liver detoxification and relieves congestion.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>5. Paschimottanasana (Seated Forward Bend)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/paschimottanasana.jpg') }}" alt="Paschimottanasana (Seated Forward Bend)">
+                </div>
+                <p>Stimulates liver function and aids in digestion.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>6. Matsyasana (Fish Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/matsyasana.jpg') }}" alt="Matsyasana (Fish Pose)">
+                </div>
+                <p>Improves liver efficiency by stretching the abdomen.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>7. Kapotasana (Pigeon Pose)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/kapotasana.jpeg') }}" alt="Kapotasana (Pigeon Pose)">
+                </div>
+                <p>Enhances blood circulation to the liver and supports detox.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>8. Anulom Vilom (Alternate Nostril Breathing)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/anulom vilom.jpg') }}" alt="Anulom Vilom (Alternate Nostril Breathing)">
+                </div>
+                <p>Balances oxygen flow, supporting liver health and detoxification.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>9. Kapalabhati (Skull Shining Breathing)</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/kapalabhati.jpg') }}" alt="Kapalabhati (Skull Shining Breathing)">
+                </div>
+                <p>Boosts metabolism and helps cleanse the liver of toxins.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>10. Brisk or Light Walking</h3>
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='liver/Brisk waking.jpg') }}" alt="Brisk or Light Walking">
+                </div>
+                <p>Encourages overall liver function by improving circulation and metabolism.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Nutritionists Worldwide.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

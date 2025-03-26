@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendations for Heart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-color: #3498db;
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: #004d40;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #00332e;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            background-color: #00221a;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+        }
+ footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Food Recommendations for Heart</h1>
+        <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('heartbackg') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="section">
+        <h2>Balanced Carbohydrates</h2>
+        <ul>
+            <li>Include whole grains, such as quinoa, bulgur, and barley.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Lean Proteins</h2>
+        <ul>
+            <li>Skinless chicken, turkey, eggs, tofu, and fish for muscle building and repair.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Fruits and Vegetables</h2>
+        <ul>
+            <li>A colorful variety to ensure a broad spectrum of nutrients.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Snacks</h2>
+        <ul>
+            <li>Trail mix with nuts, seeds, and dried fruit, or whole-grain crackers with hummus.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Dairy</h2>
+        <ul>
+            <li>Full-fat or low-fat dairy depending on calorie requirements, such as cheese and milk.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Hydration</h2>
+        <ul>
+            <li>Water, herbal teas, and fresh fruit juices with minimal sugar.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Healthy Treats</h2>
+        <ul>
+            <li>Dark chocolate (70% cocoa or higher) in moderation.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Occasional Indulgence</h2>
+        <ul>
+            <li>Red meat, sweets, and fried foods can be consumed occasionally and in moderation.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Portion Control</h2>
+        <ul>
+            <li>Even for healthier foods, avoid overeating to maintain a balanced calorie intake.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Regular Exercise and Lifestyle Habits</h2>
+        <ul>
+            <li>While not food-related, this is crucial for both prevention and overall health.</li>
+        </ul>
+    </div>
+
+
+        <div class="section">
+            <h2>Additional Tips</h2>
+            <ul>
+                <li>Consult a dietitian for personalized advice</li>
+                <li>Balance calorie intake with daily energy expenditure</li>
+                <li>Limit high-calorie, low-nutrition foods</li>
+                <li>Season foods with herbs, spices, and lemon juice instead of salt</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+ <footer>
+        <p>&copy; 2024 All Rights Reserved. Food Recommendations for Heart.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

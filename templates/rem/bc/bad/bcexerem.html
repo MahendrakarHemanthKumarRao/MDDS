@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Exercise Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #990066; /* Pink */
+            --secondary-color: #3498db; /* Blue */
+            --background-light: #f4f6f7;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        section img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 10px;
+        }
+        .card img {
+            max-width: 100%;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .card p {
+            padding: 10px;
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Breast Cancer Exercise Recommendations</h1>
+    <div class="btn-container">
+            <a href="{{ url_for('services') }}" class="btn">Services</a>
+            <a href="{{ url_for('bcbackb') }}" class="btn">Back</a>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </div>
+</header>
+    <div class="container">
+        <section>
+            <h2>Yoga Poses</h2>
+            <div class="flex">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='bc/tadasana.jpg') }}" alt="Tadasana (Mountain Pose)">
+                    <p><strong>Tadasana:</strong> Improves posture and promotes lymphatic circulation.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='bc/bhujangasana.jpg') }}" alt="Bhujangasana (Cobra Pose)">
+                    <p><strong>Bhujangasana:</strong> Opens the chest and enhances blood flow.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='bc/trikonasana.jpg') }}" alt="Trikonasana (Triangle Pose)">
+                    <p><strong>Trikonasana:</strong> Improves circulation and reduces stress.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Breathing Exercises (Pranayama)</h2>
+            <img src="{{ url_for('static', filename='bc/pranayama.jpg') }}" alt="Pranayama">
+            <p><strong>Pranayama:</strong> Reduces stress, promotes relaxation, and improves oxygen flow to vital organs.</p>
+        </section>
+
+        <section>
+            <h2>Relaxation and Recovery</h2>
+            <img src="{{ url_for('static', filename='bc/shavasana.jpg') }}" alt="Shavasana (Corpse Pose)">
+            <p><strong>Shavasana:</strong> Reduces anxiety, promotes relaxation, and allows the body to integrate healing.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 All Rights Reserved. Best Oncologists in India.</p>
+        <p>Developed by: M.Hemanth Kumar Rao, D.Jahnavi, Divyasai R, Dinesh Naik</p>
+    </footer>
+</body>
+</html>

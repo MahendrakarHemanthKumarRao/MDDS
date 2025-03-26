@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Patient Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .input-info {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup {
+            visibility: hidden;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 300px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .popup.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-content {
+            margin-bottom: 15px;
+        }
+
+        .popup-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .popup-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Overlay background */
+        .overlay {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Submit Patient Data</h1>
+    </header>
+
+    <div class="container">
+        <!--
+          Note: Remove action="/submit" and method="POST" from the form
+          if you want to **strictly** handle everything via fetch.
+        -->
+        <form id="patientForm" enctype="multipart/form-data">
+            <!-- Patient ID -->
+            <div class="form-group">
+                <label for="patient_id">Patient ID:</label>
+                <input type="text" id="patient_id" name="patient_id" value="{{ patient_id }}" readonly>
+            </div>
+
+            <!-- General Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <!-- Username -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ username }}" readonly>
+                <div id="username_error" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sex">Sex (0 for female, 1 for male):</label>
+                <input type="number" id="sex" name="sex" required min="0" max="1">
+            </div>
+
+            <!-- Heart Data -->
+            <div class="form-group">
+                <label for="cp">Chest Pain Type (0-3):</label>
+                <input type="number" id="cp" name="cp" required min="0" max="3">
+            </div>
+
+            <div class="form-group">
+                <label for="trestbps">Resting Blood Pressure:</label>
+                <input type="number" id="trestbps" name="trestbps" required>
+            </div>
+
+            <div class="form-group">
+                <label for="chol">Cholesterol:</label>
+                <input type="number" id="chol" name="chol" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fbs">Fasting Blood Sugar > 120 mg/dl (1 = true; 0 = false):</label>
+                <input type="number" id="fbs" name="fbs" required min="0" max="1">
+            </div>
+
+            <div class="form-group">
+                <label for="restecg">Resting ECG Results (0-2):</label>
+                <input type="number" id="restecg" name="restecg" required min="0" max="2">
+            </div>
+
+            <div class="form-group">
+                <label for="thalach">Max Heart Rate Achieved:</label>
+                <input type="number" id="thalach" name="thalach" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exang">Exercise Induced Angina (1 = yes; 0 = no):</label>
+                <input type="number" id="exang" name="exang" required min="0" max="1">
+            </div>
+
+            <div class="form-group">
+                <label for="oldpeak">ST Depression:</label>
+                <input type="number" id="oldpeak" name="oldpeak" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="slope">Slope of Peak Exercise ST Segment (0-2):</label>
+                <input type="number" id="slope" name="slope" required min="0" max="2">
+            </div>
+
+            <div class="form-group">
+                <label for="ca">Number of Major Vessels (0-3):</label>
+                <input type="number" id="ca" name="ca" required min="0" max="3">
+            </div>
+
+            <div class="form-group">
+                <label for="thal">Thalassemia (0 = normal; 1 = fixed defect; 2 = reversible defect):</label>
+                <input type="number" id="thal" name="thal" required min="0" max="2">
+            </div>
+
+            <!-- Kidney Data -->
+            <div class="form-group">
+                <label for="blood_pressure">Blood Pressure (mm Hg):</label>
+                <input type="number" id="blood_pressure" name="blood_pressure" required>
+            </div>
+
+            <div class="form-group">
+                <label for="specific_gravity">Specific Gravity:</label>
+                <div class="input-info">Normal range: 1.005-1.025</div>
+                <input type="number" id="specific_gravity" name="specific_gravity" required step="0.001">
+            </div>
+
+            <div class="form-group">
+                <label for="albumin_kidney">Albumin (Kidney Metric):</label>
+                <div class="input-info">Scale: 0-5</div>
+                <!-- Renamed to avoid clash with the liver "albumin" field -->
+                <input type="number" id="albumin_kidney" name="albumin_kidney" required min="0" max="5">
+            </div>
+
+            <div class="form-group">
+                <label for="sugar">Sugar:</label>
+                <div class="input-info">Scale: 0-5</div>
+                <input type="number" id="sugar" name="sugar" required min="0" max="5">
+            </div>
+
+            <div class="form-group">
+                <label for="red_blood_cells">Red Blood Cells:</label>
+                <div class="input-info">0 for normal, 1 for abnormal</div>
+                <input type="number" id="red_blood_cells" name="red_blood_cells" required min="0" max="1">
+            </div>
+
+            <div class="form-group">
+                <label for="pus_cell">Pus Cell:</label>
+                <div class="input-info">0 for normal, 1 for abnormal</div>
+                <input type="number" id="pus_cell" name="pus_cell" required min="0" max="1">
+            </div>
+
+            <div class="form-group">
+                <label for="blood_glucose_random">Blood Glucose Random (mg/dL):</label>
+                <input type="number" id="blood_glucose_random" name="blood_glucose_random" required>
+            </div>
+
+            <div class="form-group">
+                <label for="blood_urea">Blood Urea (mg/dL):</label>
+                <input type="number" id="blood_urea" name="blood_urea" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="serum_creatinine">Serum Creatinine (mg/dL):</label>
+                <input type="number" id="serum_creatinine" name="serum_creatinine" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="sodium">Sodium (mEq/L):</label>
+                <input type="number" id="sodium" name="sodium" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="potassium">Potassium (mEq/L):</label>
+                <input type="number" id="potassium" name="potassium" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="hemoglobin">Hemoglobin (g/dL):</label>
+                <input type="number" id="hemoglobin" name="hemoglobin" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="packed_cell_volume">Packed Cell Volume (%):</label>
+                <input type="number" id="packed_cell_volume" name="packed_cell_volume" required>
+            </div>
+
+            <div class="form-group">
+                <label for="white_blood_cell_count">White Blood Cell Count (cells/cumm):</label>
+                <input type="number" id="white_blood_cell_count" name="white_blood_cell_count" required>
+            </div>
+
+            <div class="form-group">
+                <label for="red_blood_cell_count">Red Blood Cell Count (millions/cmm):</label>
+                <input type="number" id="red_blood_cell_count" name="red_blood_cell_count" required step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="appetite">Appetite:</label>
+                <div class="input-info">0 for poor, 1 for good</div>
+                <input type="number" id="appetite" name="appetite" required min="0" max="1">
+            </div>
+
+            <div class="form-group">
+                <label for="anemia">Anemia:</label>
+                <div class="input-info">0 for no, 1 for yes</div>
+                <input type="number" id="anemia" name="anemia" required min="0" max="1">
+            </div>
+
+            <!-- Liver Data -->
+            <div class="form-group">
+                <label for="total_bilirubin">Total Bilirubin:</label>
+                <input type="number" id="total_bilirubin" name="total_bilirubin" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="direct_bilirubin">Direct Bilirubin:</label>
+                <input type="number" id="direct_bilirubin" name="direct_bilirubin" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="alkaline_phosphotase">Alkaline Phosphotase:</label>
+                <input type="number" id="alkaline_phosphotase" name="alkaline_phosphotase" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alamine_aminotransferase">Alamine Aminotransferase:</label>
+                <input type="number" id="alamine_aminotransferase" name="alamine_aminotransferase" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aspartate_aminotransferase">Aspartate Aminotransferase:</label>
+                <input type="number" id="aspartate_aminotransferase" name="aspartate_aminotransferase" required>
+            </div>
+
+            <div class="form-group">
+                <label for="total_proteins">Total Proteins:</label>
+                <input type="number" id="total_proteins" name="total_proteins" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="albumin_liver">Albumin (Liver Metric):</label>
+                <!-- Renamed to avoid clash with the kidney "albumin" field -->
+                <input type="number" id="albumin_liver" name="albumin_liver" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="albumin_globulin_ratio">Albumin and Globulin Ratio:</label>
+                <input type="number" id="albumin_globulin_ratio" name="albumin_globulin_ratio" required step="0.01">
+            </div>
+
+            <!-- Pneumonia Data -->
+            <div class="form-group">
+                <label for="chest_xray_upload">Upload Chest X-Ray Image:</label>
+                <input type="file" class="form-control-file" id="chest_xray_upload" name="chest_xray_image" accept="image/*" required>
+                <small class="form-text">Please upload a clear chest X-ray image in JPG, PNG, or JPEG format.</small>
+            </div>
+
+            <!-- Brain Tumor Data -->
+            <div class="form-group">
+                <label for="brain_mri_upload">Upload Brain MRI Image:</label>
+                <input type="file" class="form-control-file" id="brain_mri_upload" name="brain_mri_image" accept="image/*" required>
+                <small class="form-text">Please upload a clear brain MRI image in JPG, PNG, or JPEG format.</small>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+        </div>
+        <button class="popup-button" onclick="closePopup()">OK</button>
+    </div>
+
+  <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            const popupMessage = document.getElementById('popup-message');
+
+            // Function to show popup with a message
+            window.showPopup = function(message) {
+                if (popup && popupMessage) {
+                    popupMessage.textContent = message;
+                    popup.classList.add('show');
+                    overlay.classList.add('show');
+                }
+            };
+
+            // Function to close popup and handle redirections
+            window.closePopup = function() {
+    if (popup) {
+
+        const currentMessage = popupMessage.textContent;
+        console.log("Popup message:", currentMessage); // Debugging log
+        function closePopup() {
+            if (currentMessage === 'Data submitted successfully!') {
+                window.location.href = "{{ url_for('services') }}";
+            } else if (currentMessage === 'User must be logged in') {
+                window.location.href = "{{ url_for('services') }}";
+            } else {
+                console.log("No matching redirection for this message.");
+            }
+        }
+    }
+};
+function closePopup() {
+            window.location.href = '{{ url_for('services') }}';
+        }
+            // Handle form submission
+            const patientForm = document.getElementById('patientForm');
+            if (patientForm) {
+                patientForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    try {
+                        const formData = new FormData(patientForm);
+                        const response = await fetch('/submit', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.text();
+
+                        // Check if response contains a message
+                        if (result.includes('message')) {
+                            const messageMatch = result.match(/message="([^"]+)"/);
+                            if (messageMatch && messageMatch[1]) {
+                                showPopup(messageMatch[1]);
+                            }
+                        }
+                    } catch (error) {
+                        showPopup('An error occurred while submitting the form.');
+                    }
+                });
+            }
+
+            // Handle initial message from Flask if present
+            const initialMessage = "{{ message }}";
+            if (initialMessage && initialMessage !== "None") {
+                showPopup(initialMessage);
+            }
+        });
+    </script>
+
+</body>
+</html>

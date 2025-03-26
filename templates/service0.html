@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MDDS Services</title>
+<style>
+/* Reset and styling */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+header #MDDS {
+  font-size: 2rem;
+  color: white;
+  animation: animate-title 3s infinite;
+}
+
+@keyframes animate-title {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+header .nav_links {
+  display: flex;
+  gap: 15px;
+}
+
+header .nav_links a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+header .nav_links a:hover {
+  color: white;
+  background: black;
+  transform: scale(1.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+}
+
+.item {
+  position: relative;
+  width: 240px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item:hover {
+  transform: scale(1.1);
+}
+
+.item img {
+  width: 100%;
+  height: 360px;
+  object-fit: fit;
+  transition: opacity 0.3s ease;
+  display: block;
+  border-bottom: 2px solid #fff;
+}
+
+.item .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  padding: 1px;
+}
+
+.item:hover .content {
+  opacity: 1;
+}
+
+.item .content h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.item .content p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.item .btn {
+  margin-top: 20px;
+  width: 200px;
+  height: 79px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 25px;
+  overflow: hidden;
+  font-size: 1.2em;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.item:hover .btn {
+  filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 30px #fff);
+  letter-spacing: 0.2em;
+  color: #000;
+}
+
+.item .btn span {
+  position: absolute;
+  width: 2px;
+  height: 70%;
+  background: #fff;
+  pointer-events: none;
+  transition: transform 0.2s ease-in-out;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.item:hover .btn span {
+  transform: scaleY(1);
+}
+
+.item .btn span:nth-child(even) {
+  transform-origin: top;
+}
+
+.item:hover .btn span:nth-child(even) {
+  transform-origin: bottom;
+}
+    /* Reset and styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+header #MDDS {
+  font-size: 2rem;
+  color: white;
+  animation: animate-title 3s infinite;
+}
+
+@keyframes animate-title {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+header .nav_links {
+  display: flex;
+  gap: 15px;
+}
+
+header .nav_links a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+header .nav_links a:hover {
+  color: white;
+  background: black;
+  transform: scale(1.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px; /* Ensure container does not grow too large */
+  height: 80vh; /* Fixed height to avoid resizing */
+  padding-top: 100px; /* To avoid content overlapping with the header */
+}
+
+.item {
+  position: relative;
+  width: 240px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item:hover {
+  transform: scale(1.1);
+}
+
+.item img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+  display: block;
+  border-bottom: 2px solid #fff;
+}
+
+.item .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  padding: 1px;
+}
+
+.item:hover .content {
+  opacity: 1;
+}
+
+.item .content h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.item .content p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.item .btn {
+  margin-top: 20px;
+  width: 200px;
+  height: 79px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 25px;
+  overflow: hidden;
+  font-size: 1.2em;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.item:hover .btn {
+  filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 30px #fff);
+  letter-spacing: 0.2em;
+  color: #000;
+}
+
+.item .btn span {
+  position: absolute;
+  width: 2px;
+  height: 70%;
+  background: #fff;
+  pointer-events: none;
+  transition: transform 0.2s ease-in-out;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.item:hover .btn span {
+  transform: scaleY(1);
+}
+
+.item .btn span:nth-child(even) {
+  transform-origin: top;
+}
+
+.item:hover .btn span:nth-child(even) {
+  transform-origin: bottom;
+}
+
+</style>
+
+</head>
+<body>
+<header id="header">
+        <h1 id="MDDS" class="animate-title">MDDS</h1>
+        <nav class="nav_links">
+            <p><a href="{{ url_for('home') }}">Home</a></p>
+            <p><a href="{{ url_for('find_patient') }}">Know patient id</a></p>
+            <p><a href="{{ url_for('services') }}">Services</a></p>
+            <p><a href="{{ url_for('dashboard') }}">Dashboard</a></p>
+            <p><a href="{{ url_for('about') }}">About</a></p>
+            <p><a href="{{ url_for('contact') }}">Contact</a></p>
+            <p><a href="{{ url_for('logout') }}">Logout</a></p>
+        </nav>
+    </header>
+<div class="container">
+  <div class="item" onclick="window.location.href='{{ url_for('reg') }}';">
+    <img src="{{ url_for('static', filename='cash-register.gif') }}" alt="register">
+    <div class="content">
+      <h2>Register</h2>
+      <p>Click here to register for medical examination!</p>
+    </div>
+    <div class="btn">Register</div>
+  </div>
+
+  <div class="item" onclick="window.location.href='{{ url_for('update') }}';">
+    <img src="{{ url_for('static', filename='update.gif') }}" alt="update">
+    <div class="content">
+      <h2>Update</h2>
+      <p>Update your details for more accuracy and stability.</p>
+    </div>
+    <div class="btn">Update</div>
+  </div>
+
+  <div class="item" onclick="window.location.href='{{ url_for('service') }}';">
+    <img src="{{ url_for('static', filename='reception.gif') }}" alt="services">
+    <div class="content">
+      <h2>Services</h2>
+      <p>Explore the range of services we offer to cater to your needs.</p>
+    </div>
+    <div class="btn">Services</div>
+  </div>
+
+  <div class="item" onclick="window.location.href='{{ url_for('diet') }}';">
+    <img src="{{ url_for('static', filename='dish.gif') }}" alt="services">
+    <div class="content">
+      <h2>Diet Recommendation</h2>
+      <p>Explore the range of services we offer to cater to your needs.</p>
+    </div>
+    <div class="btn">Diet Recommendation</div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let btns = document.querySelectorAll('.btn');
+  btns.forEach(function (btn) {
+    for (let i = 0; i <= 120; i++) {
+      let span = document.createElement('span');
+      span.style.left = `${i * 2}px`;
+      let randomDelay = (Math.random() * 1) + 0;
+      span.style.transitionDelay = randomDelay + 's';
+      btn.appendChild(span);
+    }
+  });
+});
+</script>
+</body>
+</html>
