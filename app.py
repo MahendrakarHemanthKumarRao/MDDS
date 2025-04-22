@@ -9,7 +9,6 @@ import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-import tk
 from PIL import Image
 from flask import Flask, render_template, request, send_file, jsonify, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
