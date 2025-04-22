@@ -21,7 +21,6 @@ from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-import tkinter as tk
 from threading import Thread
 from dashboard import generate_graph
 import pandas as pd
