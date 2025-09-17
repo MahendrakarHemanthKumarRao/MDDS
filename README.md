@@ -1,30 +1,31 @@
-Multi-Disease Detection System (MDDS)
+**🩺 Multi-Disease Detection System (MDDS)**
 
-A comprehensive health screening and recommendation platform that leverages Machine Learning (ML) to predict multiple high-mortality diseases and provide personalized dietary, exercise, and doctor recommendations.
+A comprehensive health screening and recommendation platform that leverages Machine Learning (ML) to predict multiple high-mortality diseases and provide personalized dietary, exercise, and doctor recommendations — all through a Flask-based web interface.
 
-🚀 Features
-
+**🚀 Features**
+**🧠 Disease Prediction
+**
 Predicts six critical diseases:
 
-Heart Disease
+❤️ Heart Disease
 
-Liver Disease
+🫀 Liver Disease
 
-Kidney Disease
+🩸 Kidney Disease
 
-Pneumonia
+🫁 Pneumonia
 
-Breast Cancer
+🎗️ Breast Cancer
 
-Brain Tumor
+🧠 Brain Tumor
 
-Diet Recommendation Engine:
+**🍎 Diet Recommendation Engine**
 
 Calculates BMI and daily calorie needs
 
 Recommends meal plans based on calorie intake per meal
 
-Personalized Guidance:
+**🧑‍⚕️ Personalized Guidance**
 
 Food suggestions
 
@@ -32,38 +33,66 @@ Exercise recommendations
 
 Doctor suggestions
 
-Automated PDF Report Generation with results and recommendations
+**📝 Automated PDF Report Generation**
 
-Database Integration to store and fetch patient history by unique Patient ID
+Generates reports with prediction results and recommendations
 
-User-Friendly Interface built with Streamlit (frontend) and Flask/FastAPI (backend)
+**🗄️ Database Integration
+**
+Store and fetch patient history using a unique Patient ID
 
+**💻 User-Friendly Interface**
 
-⚙️ Installation & Setup
+Flask-based web app
 
-Clone the repository
-
-git clone https://github.com/<your-username>/mdds.git
+**⚙️ Installation & Setup**
+1️⃣ Clone the Repository
+git clone https://github.com/MahendrakarHemanthKumarRao/MDDS.git
 cd mdds
 
+2️⃣ Create a Virtual Environment
 
-Create a virtual environment
+Linux/Mac:
 
 python -m venv venv
-source venv/bin/activate    # Linux/Mac
-venv\Scripts\activate       # Windows
+source venv/bin/activate
 
 
-Install dependencies
+Windows:
 
+python -m venv venv
+venv\Scripts\activate
+
+3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-
-Run the backend
-
-python app.py   # Flask app
+4️⃣ Run the Flask App
+python app.py
 
 
-Run the frontend (Streamlit)
+Then open your browser and go to:
 
-streamlit run frontend.py
+http://127.0.0.1:5000
+
+**🛠️ Tech Stack**
+
+Python
+
+Flask (Backend & Web Interface)
+
+Machine Learning Models
+
+SQLite / Database for patient data storage
+
+ReportLab for PDF generation
+
+**📜 License**
+
+This project is licensed under the MIT License
+.
+
+**🤝 Contributing**
+
+Contributions, issues, and feature requests are welcome!
+Feel free to open an issue
+ or submit a pull request.
